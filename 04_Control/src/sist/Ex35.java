@@ -14,17 +14,18 @@ public class Ex35 {
 			}
 			System.out.println();
 		}
-		
+
 		for (int k = 2; k <= 9; k++) {
 			System.out.print("***" + k + "단***\t");
 		}
 		System.out.println();
 		for (int i = 1; i <= 9; i++) {
 			for (int j = 2; j <= 9; j++) {
-				System.out.print(j + " X " + i + "= " + (i * j) + "\t");
+//				System.out.print(j + " X " + i + "= " + (i * j) + "\t");
+				System.out.printf("%d X %d = %2d\t", j, i, (j * i));
 			}
 			System.out.println();
 		}
-		
+
 	}
 }
