@@ -26,5 +26,7 @@ public class Ex33 {
 		for (int i = start; i < end; i += step) {
 			System.out.printf(i + "cm의 표준 체중 >>> %.2f kg\n", (i - 100) * 0.9);
 		}
+
+		sc.close();
 	}
 }
