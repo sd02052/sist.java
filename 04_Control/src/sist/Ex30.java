@@ -33,5 +33,7 @@ public class Ex30 {
 		System.out.println("정답입니다!");
 		System.out.println("정답 숫자 >>> " + num);
 		System.out.println("정답 소요 횟수 >>> " + count);
+		
+		sc.close();
 	}
 }
