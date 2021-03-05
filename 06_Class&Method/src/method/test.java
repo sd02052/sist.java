@@ -78,11 +78,6 @@ class Student {
 	int id;
 	String dept;
 	String phone;
-	int num;
-
-	void add(Student[] a) {
-		
-	}
 
 	Student(String name, int id, String dept, String phone) {
 		this.name = name;
