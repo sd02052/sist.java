@@ -66,6 +66,8 @@ public class Exam_01 {
 		if (check.equals("y")) {
 			System.exit(0);
 		}
+
+		sc.close();
 	}
 
 	public static void main(String[] args) {

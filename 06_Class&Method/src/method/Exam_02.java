@@ -58,6 +58,13 @@ public class Exam_02 {
 		}
 	}
 
+	public static void end(Scanner sc) {
+		System.out.println("수고하셨습니다.");
+		sc.close();
+
+		System.exit(0); // 시스템을 종료시키는 메서드
+	}
+
 	public static void main(String[] args) {
 
 		// 1. 키보드로 학생 수를 입력을 받자.
@@ -96,7 +103,7 @@ public class Exam_02 {
 				update(id, dept, phone, sc);
 				break;
 			case 5: // 프로그램 종료 메뉴 ==> 프로그램 종료 메서드 호출
-				//end();
+				end(sc);
 				break;
 			default:
 				System.out.println("학생 관리 프로그램에 없는 메뉴입니다.");
