@@ -15,7 +15,7 @@ public class Ex05 {
 	public static void call(int num) {
 		System.out.println("call() 메서드 호출......");
 		num = 100; // 값을 변경
-	}
+	} // call 메서드 실행되고 삭제됨. 그래서 num변수는 수명을 다하고 같이 사라지게됨. 그래서 값이 안바뀜.
 
 	public static void main(String[] args) {
 
