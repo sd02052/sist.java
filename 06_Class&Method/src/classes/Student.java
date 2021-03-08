@@ -41,16 +41,16 @@ public class Student {
 	String major; // 학생 학과
 	String addr; // 학생 주소
 
-	public Student() { } // 기본 생성자
-	
+	public Student() {
+	} // 기본 생성자
+
 	public Student(int h, String n, String m, String a) {
 		hakbun = h;
 		name = n;
 		major = m;
 		addr = a;
 	} // 인자 생성자
-	
-	
+
 	// 멤버메서드
 	void display() {
 		System.out.println("학번: " + hakbun);
