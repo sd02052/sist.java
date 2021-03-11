@@ -10,5 +10,6 @@ public class Ex01_Animal {
 		Cat cat = new Cat();
 
 		cat.sound();
+
 	}
 }
