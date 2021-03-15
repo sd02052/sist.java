@@ -6,6 +6,7 @@ package polymorphism;
  * - 연산결과로 boolean 값( true / false)를 반환함.
  *   예) 참조변수 instanceof 클래스명(타입)
  *      if(a instanceof Car): 참조변수 a의 타입이 Car 클래스 타입인지를 
+ *      ==> true이면 Car 인스턴스 타입이고 false이면 Car인스턴스가 아니다.
  */
 public class Ex04_Game2 {
 	public static void main(String[] args) {
