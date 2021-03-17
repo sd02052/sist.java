@@ -17,7 +17,7 @@ public class Ex05 {
 		String str = "id=hong&pwd=1234&age=27";
 		StringTokenizer st = new StringTokenizer(str, "&"); // str을 "&" 기분으로 자른다.
 
-		int count = st.countTokens();
+		int count = st.countTokens(); // 잘라낸 토큰의 갯수
 		System.out.println("토큰 수 >>> " + count);
 		System.out.println();
 		
