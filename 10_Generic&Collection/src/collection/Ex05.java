@@ -15,7 +15,7 @@ public class Ex05 {
 	public static void main(String[] args) {
 
 		List<StudentDTO> list = new ArrayList<StudentDTO>();
-
+		
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("학생 수를 입력하세요. : ");
