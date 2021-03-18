@@ -34,6 +34,15 @@ public class Ex06_JCheckBoxExam {
 
 		jf.setBounds(100, 100, 300, 600);
 
+		// 프레임 크기 자동 조정
+		//jf.pack();
+		
+		// 프레임 크기를 고정시키는 메서드
+		jf.setResizable(false);
+
+		// 프레임 x버튼 클릭 시 종료시키는 메서드
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		jf.setVisible(true);
 
 	}

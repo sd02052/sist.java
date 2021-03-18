@@ -9,9 +9,9 @@ public class Ex04_JButton extends JFrame {
 	public Ex04_JButton() {
 
 		// 프레임을 만들어 보자.
-		JFrame frame = new JFrame();
+		//JFrame frame = new JFrame();
 
-		frame.setTitle("네번째 예제");
+		setTitle("네번째 예제");
 
 		// 컨테이터를 만들어 보자.
 		JPanel jp = new JPanel();
@@ -27,11 +27,11 @@ public class Ex04_JButton extends JFrame {
 		jp.add(jb3);
 
 		// 3. 컨테이너를 프레임에 올려야 한다.
-		frame.add(jp);
+		add(jp);
 
-		frame.setBounds(100, 100, 300, 300);
+		setBounds(100, 100, 300, 300);
 
-		frame.setVisible(true);
+		setVisible(true);
 	}
 
 	public static void main(String[] args) {
