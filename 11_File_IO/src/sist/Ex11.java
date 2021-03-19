@@ -25,7 +25,10 @@ public class Ex11 {
 
 			bw.write("여러분!! 모두 취업합시다~~~ 화이팅!!");
 			bw.newLine();
-
+			
+			// 버퍼 비우기
+			bw.flush();
+			
 			// 입출력 객체 닫기
 			bw.close();
 			fw.close();
