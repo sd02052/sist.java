@@ -12,10 +12,10 @@ public class Ex15_ETC extends JFrame {
 
 		// 1. 컴포넌트를 만들어 보자.
 		JLabel jl1 = new JLabel("아이디");
-		JTextField id = new JTextField(10);
+		JTextField id = new JTextField(5);
 
 		JLabel jl2 = new JLabel("비밀번호");
-		JPasswordField pwd = new JPasswordField(10);
+		JPasswordField pwd = new JPasswordField(5);
 
 		JLabel jl3 = new JLabel("하고 싶은 말");
 		JTextArea jta = new JTextArea(5, 30);
