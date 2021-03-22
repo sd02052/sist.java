@@ -87,8 +87,43 @@ public class Exam03 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int cnt = Integer.parseInt(jtf1.getText());
 				int money = Integer.parseInt(jtf2.getText());
-				
-				
+				String result = "";
+
+				if (jrb1.isSelected()) {
+					result = "아메리카노 " + cnt + "잔 >>> " + (2500 * cnt) + "원, 거스름돈 >>> " + (money - (2500 * cnt));
+				} else if (jrb2.isSelected()) {
+					result = "카페모카 " + cnt + "잔 >>> " + (2500 * cnt) + "원, 거스름돈 >>> " + (money - (2500 * cnt));
+				} else if (jrb3.isSelected()) {
+					result = "에스프레소 " + cnt + "잔 >>> " + (2500 * cnt) + "원, 거스름돈 >>> " + (money - (2500 * cnt));
+				} else if (jrb4.isSelected()) {
+					result = "카페라떼 " + cnt + "잔 >>> " + (4000 * cnt) + "원, 거스름돈 >>> " + (money - (4000 * cnt));
+				}
+
+				jta.append(result + "\n");
+				jtf1.setText(null);
+				jtf2.setText(null);
+
+				jtf1.requestFocus();
+			}
+		});
+
+		jb2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+
+		jb3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				jtf1.setText(null);
+				jtf2.setText(null);
+				jta.setText(null);
+
+				jtf1.requestFocus();
 			}
 		});
 	}
