@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Exam02 extends JFrame {
+public class Ex34_Event extends JFrame {
 
-	public Exam02() {
+	public Ex34_Event() {
 
 		setTitle("성적 처리");
 
@@ -73,8 +73,40 @@ public class Exam02 extends JFrame {
 				int math = Integer.parseInt(jtf4.getText());
 				int total = kor + eng + math;
 				double avg = total / 3;
-				jta.append(name + " >>> 국어 :" + kor + " 영어 : " + eng + " 수학 : " + math + " 총점 : " + total + " 평균 : "
-						+ avg);
+				String grade = "";
+
+				if (avg >= 90) {
+					grade = "A";
+					if (avg >= 95) {
+						grade = "A+";
+					}
+				} else if (avg >= 80) {
+					grade = "B";
+					if (avg >= 85) {
+						grade = "B+";
+					}
+				} else if (avg >= 70) {
+					grade = "C";
+					if (avg > 75) {
+						grade = "C+";
+					}
+				} else if (avg >= 60) {
+					grade = "D";
+					if (avg >= 65) {
+						grade = "D+";
+					}
+				} else {
+					grade = "F";
+				}
+
+				jta.append("***" + name + "님 성적결과***\n");
+				jta.append("이름 : " + name + "\n");
+				jta.append("국어점수 : " + kor + "\n");
+				jta.append("영어점수 : " + eng + "\n");
+				jta.append("수학점수 : " + math + "\n");
+				jta.append("총점 : " + total + "\n");
+				jta.append("평균 : " + String.format("%.2f점\n", avg));
+				jta.append("학점 : " + grade + "\n\n");
 
 				jtf1.setText(null);
 				jtf2.setText(null);
@@ -110,6 +142,6 @@ public class Exam02 extends JFrame {
 
 	public static void main(String[] args) {
 
-		new Exam02();
+		new Ex34_Event();
 	}
 }

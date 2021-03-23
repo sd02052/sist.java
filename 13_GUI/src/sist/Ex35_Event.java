@@ -3,12 +3,13 @@ package sist;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 
-public class Exam03 extends JFrame {
+public class Ex35_Event extends JFrame {
 
-	public Exam03() {
+	public Ex35_Event() {
 
 		setTitle("커피 자판기");
 
@@ -20,7 +21,7 @@ public class Exam03 extends JFrame {
 		JLabel jl1 = new JLabel("원하는 커피 선택");
 
 		JRadioButton jrb1 = new JRadioButton("아메리카노(2500)");
-		JRadioButton jrb2 = new JRadioButton("카페모카(2500)");
+		JRadioButton jrb2 = new JRadioButton("카페모카(3500)");
 		JRadioButton jrb3 = new JRadioButton("에스프레소(2500)");
 		JRadioButton jrb4 = new JRadioButton("카페라떼(4000)");
 
@@ -87,21 +88,45 @@ public class Exam03 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int cnt = Integer.parseInt(jtf1.getText());
 				int money = Integer.parseInt(jtf2.getText());
-				String result = "";
+				String name = "";
+				int price = 0;
+				StringTokenizer st;
 
 				if (jrb1.isSelected()) {
-					result = "아메리카노 " + cnt + "잔 >>> " + (2500 * cnt) + "원, 거스름돈 >>> " + (money - (2500 * cnt));
+					st = new StringTokenizer(jrb1.getText(), "(,)");
+					name = st.nextToken();
+					price = Integer.parseInt(st.nextToken());
 				} else if (jrb2.isSelected()) {
-					result = "카페모카 " + cnt + "잔 >>> " + (2500 * cnt) + "원, 거스름돈 >>> " + (money - (2500 * cnt));
+					st = new StringTokenizer(jrb2.getText(), "(,)");
+					name = st.nextToken();
+					price = Integer.parseInt(st.nextToken());
 				} else if (jrb3.isSelected()) {
-					result = "에스프레소 " + cnt + "잔 >>> " + (2500 * cnt) + "원, 거스름돈 >>> " + (money - (2500 * cnt));
+					st = new StringTokenizer(jrb3.getText(), "(,)");
+					name = st.nextToken();
+					price = Integer.parseInt(st.nextToken());
 				} else if (jrb4.isSelected()) {
-					result = "카페라떼 " + cnt + "잔 >>> " + (4000 * cnt) + "원, 거스름돈 >>> " + (money - (4000 * cnt));
+					st = new StringTokenizer(jrb4.getText(), "(,)");
+					name = st.nextToken();
+					price = Integer.parseInt(st.nextToken());
 				}
 
-				jta.append(result + "\n");
+				int gong = price * cnt;
+				int vat = (int) (gong * 0.1);
+				int chong = gong + vat;
+				int change = money - chong;
+
+				jta.append("커피종류 : " + name + "\n");
+				jta.append("커피단가 : " + String.format("%,d원\n", price));
+				jta.append("수량 : " + cnt + "\n");
+				jta.append("공급가액 : " + String.format("%,d원\n", gong));
+				jta.append("부가세액 : " + String.format("%,d원\n", vat));
+				jta.append("총금액 : " + String.format("%,d원\n", chong));
+				jta.append("입금액 : " + String.format("%,d원\n", money));
+				jta.append("거스름돈 : " + String.format("%,d원\n", change));
+
 				jtf1.setText(null);
 				jtf2.setText(null);
+				bg.clearSelection();
 
 				jtf1.requestFocus();
 			}
@@ -122,6 +147,7 @@ public class Exam03 extends JFrame {
 				jtf1.setText(null);
 				jtf2.setText(null);
 				jta.setText(null);
+				bg.clearSelection();
 
 				jtf1.requestFocus();
 			}
@@ -130,6 +156,6 @@ public class Exam03 extends JFrame {
 
 	public static void main(String[] args) {
 
-		new Exam03();
+		new Ex35_Event();
 	}
 }

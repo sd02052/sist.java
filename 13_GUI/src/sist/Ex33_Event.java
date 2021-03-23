@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Exam01 extends JFrame {
+public class Ex33_Event extends JFrame {
 
-	public Exam01() {
+	public Ex33_Event() {
 		setTitle("계산기 예제 - 3");
 
 		JPanel north_1 = new JPanel();
@@ -105,12 +105,12 @@ public class Exam01 extends JFrame {
 					result = "결과 >>> " + a + " / " + b + " = " + (a / b);
 				}
 				jta.append(result + "\n");
-				
-				System.out.println(bg.getSelection());
 
 				su1.setText(null);
 				su2.setText(null);
 
+				// 라디오버튼 초기화
+				bg.clearSelection();
 				su1.requestFocus();
 			}
 		});
@@ -138,6 +138,6 @@ public class Exam01 extends JFrame {
 
 	public static void main(String[] args) {
 
-		new Exam01();
+		new Ex33_Event();
 	}
 }
