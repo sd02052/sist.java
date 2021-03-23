@@ -105,7 +105,7 @@ public class Ex33_Event extends JFrame {
 					result = "결과 >>> " + a + " / " + b + " = " + (a / b);
 				}
 				jta.append(result + "\n");
-
+				System.out.println(bg.getSelection());
 				su1.setText(null);
 				su2.setText(null);
 
