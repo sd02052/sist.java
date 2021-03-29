@@ -14,6 +14,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
 
 public class MemberList {
 
@@ -49,30 +56,31 @@ public class MemberList {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 500);
+		frame.setBounds(200, 200, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 584, 461);
+		tabbedPane.setBounds(0, 0, 972, 551);
 		frame.getContentPane().add(tabbedPane);
 
 		JPanel jp1 = new JPanel();
 		jp1.setBackground(Color.LIGHT_GRAY);
 		tabbedPane.addTab("메뉴변경", null, jp1, null);
-		tabbedPane.setBackgroundAt(0, Color.GRAY);
+		tabbedPane.setBackgroundAt(0, Color.WHITE);
 
 		JPanel jp2 = new JPanel();
 		jp2.setBackground(Color.LIGHT_GRAY);
 		tabbedPane.addTab("회원정보 조회", null, jp2, null);
+		tabbedPane.setBackgroundAt(1, Color.WHITE);
 		jp2.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 27, 367, 374);
+		scrollPane.setBounds(12, 27, 755, 474);
 		jp2.add(scrollPane);
 
 		table = new JTable();
-		table.setBackground(SystemColor.activeCaption);
+		table.setBackground(SystemColor.inactiveCaption);
 		table.setModel(
 				new DefaultTableModel(
 						new Object[][] {
@@ -92,32 +100,33 @@ public class MemberList {
 		scrollPane.setViewportView(table);
 
 		JButton btnNewButton = new JButton("회원번호로 찾기");
-		btnNewButton.setBounds(409, 30, 142, 31);
+		btnNewButton.setBounds(813, 27, 142, 31);
 		jp2.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("아이디로 찾기");
-		btnNewButton_1.setBounds(409, 71, 142, 31);
+		btnNewButton_1.setBounds(813, 68, 142, 31);
 		jp2.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("이름으로 찾기");
-		btnNewButton_2.setBounds(409, 112, 142, 31);
+		btnNewButton_2.setBounds(813, 109, 142, 31);
 		jp2.add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("닉네임으로 찾기");
-		btnNewButton_3.setBounds(409, 153, 142, 31);
+		btnNewButton_3.setBounds(813, 150, 142, 31);
 		jp2.add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("삭제");
-		btnNewButton_4.setBounds(496, 370, 71, 31);
+		btnNewButton_4.setBounds(884, 469, 71, 31);
 		jp2.add(btnNewButton_4);
 
 		JPanel jp3 = new JPanel();
 		jp3.setBackground(Color.LIGHT_GRAY);
 		tabbedPane.addTab("매출 조회", null, jp3, null);
+		tabbedPane.setBackgroundAt(2, Color.WHITE);
 		jp3.setLayout(null);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 27, 367, 374);
+		scrollPane_1.setBounds(12, 27, 755, 474);
 		jp3.add(scrollPane_1);
 
 		table_1 = new JTable();
@@ -137,32 +146,50 @@ public class MemberList {
 				new aaa();
 			}
 		});
-		btnNewButton_5.setBounds(409, 30, 142, 31);
+		btnNewButton_5.setBounds(813, 27, 142, 31);
 		jp3.add(btnNewButton_5);
 
 		JLabel lblNewLabel = new JLabel("총 매출 : ");
-		lblNewLabel.setBounds(409, 137, 57, 15);
+		lblNewLabel.setBounds(813, 134, 57, 15);
 		jp3.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("1,000,000");
-		lblNewLabel_1.setBounds(468, 137, 57, 15);
+		lblNewLabel_1.setBounds(872, 134, 57, 15);
 		jp3.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("카드 : ");
-		lblNewLabel_2.setBounds(409, 162, 57, 15);
+		lblNewLabel_2.setBounds(813, 159, 57, 15);
 		jp3.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("현금 : ");
-		lblNewLabel_3.setBounds(409, 187, 57, 15);
+		lblNewLabel_3.setBounds(813, 184, 57, 15);
 		jp3.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("800,000");
-		lblNewLabel_4.setBounds(468, 162, 57, 15);
+		lblNewLabel_4.setBounds(872, 159, 57, 15);
 		jp3.add(lblNewLabel_4);
 
 		JLabel lblNewLabel_5 = new JLabel("200,000");
-		lblNewLabel_5.setBounds(468, 187, 57, 15);
+		lblNewLabel_5.setBounds(872, 184, 57, 15);
 		jp3.add(lblNewLabel_5);
 
+		
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }

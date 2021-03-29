@@ -259,7 +259,7 @@ public class aaa extends JFrame implements ActionListener {
 
 		for (int i = 1; i <= lastDate; i++) {
 
-			JLabel lbl = new JLabel(String.valueOf(i), JLabel.CENTER);
+			JButton jb = new JButton(String.valueOf(i));
 
 			cal.set(y, m - 1, i);
 
@@ -267,15 +267,15 @@ public class aaa extends JFrame implements ActionListener {
 
 			if (outWeek == 1) {
 
-				lbl.setForeground(Color.red);
+				jb.setForeground(Color.red);
 
 			} else if (outWeek == 7) {
 
-				lbl.setForeground(Color.BLUE);
+				jb.setForeground(Color.BLUE);
 
 			}
 
-			datePane.add(lbl);
+			datePane.add(jb);
 
 		}
 
