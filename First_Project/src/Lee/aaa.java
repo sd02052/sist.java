@@ -9,7 +9,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.net.DatagramPacket;
 import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
@@ -62,23 +64,19 @@ public class aaa extends JFrame implements ActionListener {
 
 	public aaa() {
 
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);	//자원 해제 후 종료
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE); // 자원 해제 후 종료
 
-		now = Calendar.getInstance();	//현재 날짜
+		now = Calendar.getInstance(); // 현재 날짜
 
 		year = now.get(Calendar.YEAR);
 
-		month = now.get(Calendar.MONTH)+1;
+		month = now.get(Calendar.MONTH) + 1;
 
 		date = now.get(Calendar.DATE);
 
-		
-
 		topPane.add(prevBtn);
 
-		
-
-		for(int i=year-100; i<=year+50; i++){
+		for (int i = year - 100; i <= year + 50; i++) {
 
 			yearModel.addElement(i);
 
@@ -86,17 +84,13 @@ public class aaa extends JFrame implements ActionListener {
 
 		yearCombo.setModel(yearModel);
 
-		yearCombo.setSelectedItem(year);	//현재 년도 선택
+		yearCombo.setSelectedItem(year); // 현재 년도 선택
 
 		topPane.add(yearCombo);
 
-		
-
 		topPane.add(yearLbl);
 
-		
-
-		for(int i=1; i<=12; i++){
+		for (int i = 1; i <= 12; i++) {
 
 			monthModel.addElement(i);
 
@@ -104,37 +98,31 @@ public class aaa extends JFrame implements ActionListener {
 
 		monthCombo.setModel(monthModel);
 
-		monthCombo.setSelectedItem(month);	//현재 월 선택
+		monthCombo.setSelectedItem(month); // 현재 월 선택
 
 		topPane.add(monthCombo);
 
-		
-
 		topPane.add(monthLbl);
 
-		
-
 		topPane.add(nextBtn);
-
-		
 
 		topPane.setBackground(new Color(100, 200, 200));
 
 		add(topPane, "North");
 
-		//Center
+		// Center
 
 		titlePane.setBackground(Color.white);
 
-		for(int i=0; i<titleStr.length; i++){
+		for (int i = 0; i < titleStr.length; i++) {
 
 			JLabel lbl = new JLabel(titleStr[i], JLabel.CENTER);
 
-			if(i == 0){
+			if (i == 0) {
 
 				lbl.setForeground(Color.red);
 
-			}else if(i == 6){
+			} else if (i == 6) {
 
 				lbl.setForeground(Color.blue);
 
@@ -146,22 +134,17 @@ public class aaa extends JFrame implements ActionListener {
 
 		centerPane.add(titlePane, "North");
 
-		//날짜 출력
+		// 날짜 출력
 
 		dayPrint(year, month);
 
 		centerPane.add(datePane, "Center");
 
-		
-
 		add(centerPane, "Center");
 
-		
 		setSize(400, 300);
 
 		setVisible(true);
-
-		
 
 		prevBtn.addActionListener(this);
 
@@ -170,8 +153,6 @@ public class aaa extends JFrame implements ActionListener {
 		yearCombo.addActionListener(this);
 
 		monthCombo.addActionListener(this);
-
-		
 
 	}
 
@@ -260,6 +241,7 @@ public class aaa extends JFrame implements ActionListener {
 		for (int i = 1; i <= lastDate; i++) {
 
 			JButton jb = new JButton(String.valueOf(i));
+			System.out.println(String.valueOf(i));
 
 			cal.set(y, m - 1, i);
 
@@ -276,6 +258,14 @@ public class aaa extends JFrame implements ActionListener {
 			}
 
 			datePane.add(jb);
+			jb.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println(jb.getText());
+					dispose();
+				}
+			});
 
 		}
 

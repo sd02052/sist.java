@@ -144,6 +144,7 @@ public class MemberList {
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new aaa();
+				
 			}
 		});
 		btnNewButton_5.setBounds(813, 27, 142, 31);
