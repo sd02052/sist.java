@@ -15,11 +15,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class MemberList {
+public class memberList {
 
 	private JFrame frame;
 	private JTable table;
-	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -28,7 +27,7 @@ public class MemberList {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MemberList window = new MemberList();
+					memberList window = new memberList();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +39,7 @@ public class MemberList {
 	/**
 	 * Create the application.
 	 */
-	public MemberList() {
+	public memberList() {
 		initialize();
 	}
 
@@ -57,15 +56,10 @@ public class MemberList {
 		tabbedPane.setBounds(0, 0, 972, 551);
 		frame.getContentPane().add(tabbedPane);
 
-		JPanel jp1 = new JPanel();
-		jp1.setBackground(Color.LIGHT_GRAY);
-		tabbedPane.addTab("메뉴변경", null, jp1, null);
-		tabbedPane.setBackgroundAt(0, Color.WHITE);
-
 		JPanel jp2 = new JPanel();
 		jp2.setBackground(Color.LIGHT_GRAY);
 		tabbedPane.addTab("회원정보 조회", null, jp2, null);
-		tabbedPane.setBackgroundAt(1, Color.WHITE);
+		tabbedPane.setBackgroundAt(0, Color.WHITE);
 		jp2.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -136,62 +130,6 @@ public class MemberList {
 		JButton btnNewButton_4 = new JButton("삭제");
 		btnNewButton_4.setBounds(884, 469, 71, 31);
 		jp2.add(btnNewButton_4);
-
-		JPanel jp3 = new JPanel();
-		jp3.setBackground(Color.LIGHT_GRAY);
-		tabbedPane.addTab("매출 조회", null, jp3, null);
-		tabbedPane.setBackgroundAt(2, Color.WHITE);
-		jp3.setLayout(null);
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 27, 755, 474);
-		jp3.add(scrollPane_1);
-
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "\uBA54\uB274\uBA85", "\uC218\uB7C9", "\uD310\uB9E4\uC561" }) {
-			Class[] columnTypes = new Class[] { String.class, Integer.class, Integer.class };
-
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		scrollPane_1.setViewportView(table_1);
-
-		JButton btnNewButton_5 = new JButton("날짜 선택");
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new Calender((int) (btnNewButton_5.getLocationOnScreen().getX() - 7),
-						(int) (btnNewButton_5.getLocationOnScreen().getY()) + 30);
-
-			}
-		});
-		btnNewButton_5.setBounds(813, 27, 142, 31);
-		jp3.add(btnNewButton_5);
-
-		JLabel lblNewLabel = new JLabel("총 매출 : ");
-		lblNewLabel.setBounds(813, 134, 57, 15);
-		jp3.add(lblNewLabel);
-
-		JLabel lblNewLabel_1 = new JLabel("1,000,000");
-		lblNewLabel_1.setBounds(872, 134, 57, 15);
-		jp3.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("카드 : ");
-		lblNewLabel_2.setBounds(813, 159, 57, 15);
-		jp3.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("현금 : ");
-		lblNewLabel_3.setBounds(813, 184, 57, 15);
-		jp3.add(lblNewLabel_3);
-
-		JLabel lblNewLabel_4 = new JLabel("800,000");
-		lblNewLabel_4.setBounds(872, 159, 57, 15);
-		jp3.add(lblNewLabel_4);
-
-		JLabel lblNewLabel_5 = new JLabel("200,000");
-		lblNewLabel_5.setBounds(872, 184, 57, 15);
-		jp3.add(lblNewLabel_5);
 
 	}
 
