@@ -26,7 +26,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JPanel;
 
-public class aaa extends JFrame implements ActionListener {
+public class Calender extends JFrame implements ActionListener {
 
 	// North
 
@@ -62,7 +62,7 @@ public class aaa extends JFrame implements ActionListener {
 
 	int year, month, date;
 
-	public aaa() {
+	public Calender(int x, int y) {
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE); // 자원 해제 후 종료
 
@@ -142,7 +142,8 @@ public class aaa extends JFrame implements ActionListener {
 
 		add(centerPane, "Center");
 
-		setSize(400, 300);
+		setBounds(x, y, 400, 300);
+//		setSize(400, 300);
 
 		setVisible(true);
 
@@ -241,7 +242,6 @@ public class aaa extends JFrame implements ActionListener {
 		for (int i = 1; i <= lastDate; i++) {
 
 			JButton jb = new JButton(String.valueOf(i));
-			System.out.println(String.valueOf(i));
 
 			cal.set(y, m - 1, i);
 
@@ -268,12 +268,6 @@ public class aaa extends JFrame implements ActionListener {
 			});
 
 		}
-
-	}
-
-	public static void main(String[] args) {
-
-		new aaa();
 
 	}
 

@@ -3,6 +3,8 @@ package Lee;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,15 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JMenuItem;
 
 public class MemberList {
 
@@ -81,37 +74,62 @@ public class MemberList {
 
 		table = new JTable();
 		table.setBackground(SystemColor.inactiveCaption);
-		table.setModel(
-				new DefaultTableModel(
-						new Object[][] {
-								{ new Integer(1), "\uC774\uC21C\uC2E0123", "1234", "\uC774\uC21C\uC2E0", "1",
-										new Integer(1) },
-								{ new Integer(2), "2", "5678", "2", "2", new Integer(2) },
-								{ new Integer(3), "3", "1234", "3", "3", new Integer(5000) }, },
-						new String[] { "\uD68C\uC6D0\uBC88\uD638", "\uC544\uC774\uB514", "\uBE44\uBC00\uBC88\uD638",
-								"\uB2C9\uB124\uC784", "\uBE44\uBC00\uBC88\uD638", "\uB9C8\uC77C\uB9AC\uC9C0" }) {
-					Class[] columnTypes = new Class[] { Integer.class, String.class, String.class, String.class,
-							String.class, Integer.class };
+		table.setModel(new DefaultTableModel(
+				 new Object[][] {
+						{ new Integer(1), "이순신", "\uC774\uC21C\uC2E0123", "1234", "\uC774\uC21C\uC2E0", "1",
+								new Integer(1) },
+						{ new Integer(2), "김연아", "2", "5678", "2", "2", new Integer(2) },
+						{ new Integer(3), "세종대왕", "3", "1234", "3", "3", new Integer(5000) }, },
+				new String[] { "\uD68C\uC6D0\uBC88\uD638", "\uC774\uB984", "\uC544\uC774\uB514",
+						"\uBE44\uBC00\uBC88\uD638", "\uB2C9\uB124\uC784", "\uBE44\uBC00\uBC88\uD638",
+						"\uB9C8\uC77C\uB9AC\uC9C0" }) {
+			Class[] columnTypes = new Class[] { Integer.class, String.class, String.class, String.class, String.class,
+					String.class, Integer.class };
 
-					public Class getColumnClass(int columnIndex) {
-						return columnTypes[columnIndex];
-					}
-				});
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
 		scrollPane.setViewportView(table);
 
 		JButton btnNewButton = new JButton("회원번호로 찾기");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FindNo((int) frame.getLocationOnScreen().getX() + 300,
+						(int) frame.getLocationOnScreen().getY() + 200);
+
+			}
+		});
 		btnNewButton.setBounds(813, 27, 142, 31);
 		jp2.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("아이디로 찾기");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FindId((int) frame.getLocationOnScreen().getX() + 300,
+						(int) frame.getLocationOnScreen().getY() + 200);
+			}
+		});
 		btnNewButton_1.setBounds(813, 68, 142, 31);
 		jp2.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("이름으로 찾기");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FindName((int) frame.getLocationOnScreen().getX() + 300,
+						(int) frame.getLocationOnScreen().getY() + 200);
+			}
+		});
 		btnNewButton_2.setBounds(813, 109, 142, 31);
 		jp2.add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("닉네임으로 찾기");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FindNickname((int) frame.getLocationOnScreen().getX() + 300,
+						(int) frame.getLocationOnScreen().getY() + 200);
+			}
+		});
 		btnNewButton_3.setBounds(813, 150, 142, 31);
 		jp2.add(btnNewButton_3);
 
@@ -143,8 +161,9 @@ public class MemberList {
 		JButton btnNewButton_5 = new JButton("날짜 선택");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new aaa();
-				
+				new Calender((int) (btnNewButton_5.getLocationOnScreen().getX() - 7),
+						(int) (btnNewButton_5.getLocationOnScreen().getY()) + 30);
+
 			}
 		});
 		btnNewButton_5.setBounds(813, 27, 142, 31);
@@ -174,23 +193,6 @@ public class MemberList {
 		lblNewLabel_5.setBounds(872, 184, 57, 15);
 		jp3.add(lblNewLabel_5);
 
-		
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
-	}
+
 }
