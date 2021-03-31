@@ -3,7 +3,7 @@ package Lee;
 import java.awt.BorderLayout;
 
 import java.awt.Color;
-
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import java.awt.event.ActionEvent;
@@ -35,6 +35,8 @@ public class Calender extends JFrame implements ActionListener {
 	JButton prevBtn = new JButton("◀");
 
 	JButton nextBtn = new JButton("▶");
+
+	JButton todayBtn = new JButton("오늘");
 
 	JLabel yearLbl = new JLabel("년");
 
@@ -106,6 +108,8 @@ public class Calender extends JFrame implements ActionListener {
 
 		topPane.add(nextBtn);
 
+		topPane.add(todayBtn);
+
 		topPane.setBackground(new Color(100, 200, 200));
 
 		add(topPane, "North");
@@ -151,6 +155,8 @@ public class Calender extends JFrame implements ActionListener {
 
 		nextBtn.addActionListener(this);
 
+		todayBtn.addActionListener(this);
+
 		yearCombo.addActionListener(this);
 
 		monthCombo.addActionListener(this);
@@ -184,6 +190,10 @@ public class Calender extends JFrame implements ActionListener {
 
 				}
 
+				yearCombo.setSelectedItem(yy);
+
+				monthCombo.setSelectedItem(mm);
+
 			} else if (eventBtn.equals(nextBtn)) { // 다음달
 
 				if (mm == 12) {
@@ -197,11 +207,18 @@ public class Calender extends JFrame implements ActionListener {
 
 				}
 
+				yearCombo.setSelectedItem(yy);
+
+				monthCombo.setSelectedItem(mm);
+
+			} else if (eventBtn.equals(todayBtn)) {
+
+				createDayStart();
+
+				yearCombo.setSelectedItem(year);
+
+				monthCombo.setSelectedItem(month);
 			}
-
-			yearCombo.setSelectedItem(yy);
-
-			monthCombo.setSelectedItem(mm);
 
 		} else if (obj instanceof JComboBox) { // 콤보박스 이벤트 발생시
 
@@ -257,12 +274,18 @@ public class Calender extends JFrame implements ActionListener {
 
 			}
 
+			if (i == date && (int) yearCombo.getSelectedItem() == year && (int) monthCombo.getSelectedItem() == month) {
+				jb.setBackground(Color.YELLOW);
+			}
+
 			datePane.add(jb);
+
 			jb.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(jb.getText());
+					System.out.println((int) yearCombo.getSelectedItem() + "-" + (int) monthCombo.getSelectedItem()
+							+ "-" + Integer.parseInt(jb.getText()));
 					dispose();
 				}
 			});

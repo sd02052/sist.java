@@ -1,21 +1,18 @@
 package Lee;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class memberList {
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class MemberList extends JFrame {
 
 	private JFrame frame;
 	private JTable table;
@@ -24,52 +21,44 @@ public class memberList {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					memberList window = new memberList();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MemberFind window = new MemberFind();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+
+		new MemberList();
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public memberList() {
-		initialize();
-	}
+//	public MemberFind() {
+//		initialize();
+//	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public MemberList() {
 		frame = new JFrame();
 		frame.setBounds(200, 200, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 972, 551);
-		frame.getContentPane().add(tabbedPane);
-
-		JPanel jp2 = new JPanel();
-		jp2.setBackground(Color.LIGHT_GRAY);
-		tabbedPane.addTab("회원정보 조회", null, jp2, null);
-		tabbedPane.setBackgroundAt(0, Color.WHITE);
-		jp2.setLayout(null);
-
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 27, 755, 474);
-		jp2.add(scrollPane);
+		scrollPane.setBounds(12, 77, 755, 474);
+		frame.getContentPane().add(scrollPane);
 
 		table = new JTable();
 		table.setBackground(SystemColor.inactiveCaption);
 		table.setModel(new DefaultTableModel(
-				 new Object[][] {
+				new Object[][] {
 						{ new Integer(1), "이순신", "\uC774\uC21C\uC2E0123", "1234", "\uC774\uC21C\uC2E0", "1",
 								new Integer(1) },
 						{ new Integer(2), "김연아", "2", "5678", "2", "2", new Integer(2) },
@@ -91,11 +80,10 @@ public class memberList {
 			public void actionPerformed(ActionEvent e) {
 				new FindNo((int) frame.getLocationOnScreen().getX() + 300,
 						(int) frame.getLocationOnScreen().getY() + 200);
-
 			}
 		});
-		btnNewButton.setBounds(813, 27, 142, 31);
-		jp2.add(btnNewButton);
+		btnNewButton.setBounds(813, 77, 142, 31);
+		frame.getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("아이디로 찾기");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -104,8 +92,8 @@ public class memberList {
 						(int) frame.getLocationOnScreen().getY() + 200);
 			}
 		});
-		btnNewButton_1.setBounds(813, 68, 142, 31);
-		jp2.add(btnNewButton_1);
+		btnNewButton_1.setBounds(813, 118, 142, 31);
+		frame.getContentPane().add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("이름으로 찾기");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -114,8 +102,8 @@ public class memberList {
 						(int) frame.getLocationOnScreen().getY() + 200);
 			}
 		});
-		btnNewButton_2.setBounds(813, 109, 142, 31);
-		jp2.add(btnNewButton_2);
+		btnNewButton_2.setBounds(813, 159, 142, 31);
+		frame.getContentPane().add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("닉네임으로 찾기");
 		btnNewButton_3.addActionListener(new ActionListener() {
@@ -124,13 +112,52 @@ public class memberList {
 						(int) frame.getLocationOnScreen().getY() + 200);
 			}
 		});
-		btnNewButton_3.setBounds(813, 150, 142, 31);
-		jp2.add(btnNewButton_3);
+		btnNewButton_3.setBounds(813, 200, 142, 31);
+		frame.getContentPane().add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("삭제");
-		btnNewButton_4.setBounds(884, 469, 71, 31);
-		jp2.add(btnNewButton_4);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MemberDelete((int) frame.getLocationOnScreen().getX() + 300,
+						(int) frame.getLocationOnScreen().getY() + 200);
+			}
+		});
+		btnNewButton_4.setBounds(884, 519, 71, 31);
+		frame.getContentPane().add(btnNewButton_4);
 
+		JButton btnNewButton_5 = new JButton("메뉴변경");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MenuChange();
+				frame.dispose();
+			}
+		});
+		btnNewButton_5.setBounds(12, 30, 97, 23);
+		frame.getContentPane().add(btnNewButton_5);
+
+		JButton btnNewButton_1_1 = new JButton("회원정보 조회");
+		btnNewButton_1_1.setBounds(121, 30, 125, 23);
+		frame.getContentPane().add(btnNewButton_1_1);
+
+		JButton btnNewButton_2_1 = new JButton("매출 조회");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new SalesList();
+				frame.dispose();
+			}
+		});
+		btnNewButton_2_1.setBounds(258, 30, 97, 23);
+		frame.getContentPane().add(btnNewButton_2_1);
+
+		JButton btnNewButton_4_1 = new JButton("홈");
+		btnNewButton_4_1.setBounds(789, 30, 57, 23);
+		frame.getContentPane().add(btnNewButton_4_1);
+
+		JButton btnNewButton_3_1 = new JButton("로그아웃");
+		btnNewButton_3_1.setBounds(858, 30, 97, 23);
+		frame.getContentPane().add(btnNewButton_3_1);
+
+		frame.setVisible(true);
 	}
 
 }

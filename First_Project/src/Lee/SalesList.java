@@ -47,6 +47,7 @@ public class SalesList extends JFrame {
 	 */
 	public SalesList() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(200, 200, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -101,21 +102,27 @@ public class SalesList extends JFrame {
 		frame.getContentPane().add(lblNewLabel_5);
 
 		JButton btnNewButton = new JButton("메뉴변경");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MenuChange();
+				frame.dispose();
+			}
+		});
 		btnNewButton.setBounds(12, 30, 97, 23);
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("회원정보 조회");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MemberFind();
+				new MemberList();
 				frame.dispose();
 			}
 		});
-		btnNewButton_1.setBounds(121, 30, 109, 23);
+		btnNewButton_1.setBounds(121, 30, 125, 23);
 		frame.getContentPane().add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("매출 조회");
-		btnNewButton_2.setBounds(242, 30, 97, 23);
+		btnNewButton_2.setBounds(258, 30, 97, 23);
 		frame.getContentPane().add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("로그아웃");
