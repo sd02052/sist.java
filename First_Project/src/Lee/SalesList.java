@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
@@ -51,7 +52,8 @@ public class SalesList extends JFrame {
 		frame.setBounds(200, 200, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		frame.setLocationRelativeTo(null);
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(12, 77, 755, 474);
 		frame.getContentPane().add(scrollPane_1);
@@ -128,6 +130,11 @@ public class SalesList extends JFrame {
 		JButton btnNewButton_3 = new JButton("로그아웃");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					new ManagerLogin();
+					frame.dispose();
+				}
 			}
 		});
 		btnNewButton_3.setBounds(858, 30, 97, 23);

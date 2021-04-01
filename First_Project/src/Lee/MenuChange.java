@@ -50,6 +50,7 @@ public class MenuChange {
 		frame.setBounds(100, 100, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(null);
 
 		// 메뉴변경 버튼
 		JButton menuChangeBtn = new JButton("메뉴변경");
@@ -85,6 +86,15 @@ public class MenuChange {
 
 		// 로그아웃 버튼
 		JButton logoutBtn = new JButton("로그아웃");
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					new ManagerLogin();
+					frame.dispose();
+				}
+			}
+		});
 		logoutBtn.setBounds(867, 30, 90, 35);
 		frame.getContentPane().add(logoutBtn);
 

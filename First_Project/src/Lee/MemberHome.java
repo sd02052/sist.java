@@ -61,15 +61,15 @@ public class MemberHome {
 		ImageIcon Path = null;
 
 		if (Value == 1) {
-			Path = new ImageIcon("C:\\Users\\sist\\git\\sist.java\\First_Project\\Image\\banner1.jpg");
+			Path = new ImageIcon("Image\\banner1.jpg");
 		} else if (Value == 2) {
-			Path = new ImageIcon("C:\\Users\\sist\\git\\sist.java\\First_Project\\Image\\banner2.jpg");
+			Path = new ImageIcon("Image\\banner2.jpg");
 		} else if (Value == 3) {
-			Path = new ImageIcon("C:\\Users\\sist\\git\\sist.java\\First_Project\\Image\\banner3.jpg");
+			Path = new ImageIcon("Image\\banner3.jpg");
 		} else if (Value == 4) {
-			Path = new ImageIcon("C:\\Users\\sist\\git\\sist.java\\First_Project\\Image\\banner4.jpg");
+			Path = new ImageIcon("Image\\banner4.jpg");
 		} else if (Value == 5) {
-			Path = new ImageIcon("C:\\Users\\sist\\git\\sist.java\\First_Project\\Image\\banner5.jpg");
+			Path = new ImageIcon("Image\\banner5.jpg");
 		}
 
 		Image img1 = Path.getImage();
@@ -95,6 +95,7 @@ public class MemberHome {
 		frame.setBounds(100, 100, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(null);
 
 		// 메인홈 버튼
 		JButton mainMemberHomeBtn = new JButton("홈");
@@ -103,6 +104,12 @@ public class MemberHome {
 
 		// 주문 버튼
 		JButton orderBtn = new JButton("주문");
+		orderBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Order_win();
+				frame.dispose();
+			}
+		});
 		orderBtn.setBounds(164, 30, 122, 35);
 		frame.getContentPane().add(orderBtn);
 
@@ -115,8 +122,13 @@ public class MemberHome {
 		JButton logoutBtn = new JButton("로그아웃");
 		logoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MemberLogin();
-				frame.dispose();
+
+				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					new MemberLogin();
+					frame.dispose();
+				}
+
 			}
 		});
 		logoutBtn.setBounds(867, 30, 90, 35);
@@ -132,7 +144,7 @@ public class MemberHome {
 		frame.getContentPane().add(mainText);
 
 		// 광고 이미지
-		ImageIcon banner1 = new ImageIcon("C:\\Users\\sist\\git\\sist.java\\First_Project\\Image//banner1.jpg");
+		ImageIcon banner1 = new ImageIcon("Image\\banner1.jpg");
 		lb1 = new JLabel(banner1);
 		lb1.setBounds(631, 112, 300, 400);
 		frame.getContentPane().add(lb1);

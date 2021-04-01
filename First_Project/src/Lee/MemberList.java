@@ -3,6 +3,7 @@ package Lee;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -50,7 +51,8 @@ public class MemberList extends JFrame {
 		frame.setBounds(200, 200, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		frame.setLocationRelativeTo(null);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 77, 755, 474);
 		frame.getContentPane().add(scrollPane);
@@ -154,6 +156,15 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton_4_1);
 
 		JButton btnNewButton_3_1 = new JButton("로그아웃");
+		btnNewButton_3_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					new ManagerLogin();
+					frame.dispose();
+				}
+			}
+		});
 		btnNewButton_3_1.setBounds(858, 30, 97, 23);
 		frame.getContentPane().add(btnNewButton_3_1);
 
