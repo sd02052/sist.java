@@ -24,37 +24,37 @@ public class MemberHome {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-
-		// 광고 이미지 타이머 메서드
-		Timer tmr = new Timer();
-		TimerTask tTask = new TimerTask() {
-
-			@Override
-			public void run() {
-				mChangeImage(ChangeCount);
-
-				ChangeCount++;
-
-				if (ChangeCount == 6)
-					ChangeCount = 1;
-			}
-		};
-
-		tmr.schedule(tTask, 3000, 3000);
-		//
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MemberHome window = new MemberHome();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//
+//		// 광고 이미지 타이머 메서드
+//		Timer tmr = new Timer();
+//		TimerTask tTask = new TimerTask() {
+//
+//			@Override
+//			public void run() {
+//				mChangeImage(ChangeCount);
+//
+//				ChangeCount++;
+//
+//				if (ChangeCount == 6)
+//					ChangeCount = 1;
+//			}
+//		};
+//
+//		tmr.schedule(tTask, 3000, 3000);
+//		//
+//
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MemberHome window = new MemberHome();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	// 광고 이미지 메서드
 	private static void mChangeImage(int Value) {
@@ -83,14 +83,32 @@ public class MemberHome {
 	/**
 	 * Create the application.
 	 */
-	public MemberHome() {
-		initialize();
-	}
+//	public MemberHome() {
+//		initialize();
+//	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public MemberHome() {
+		
+		// 광고 이미지 타이머 메서드
+				Timer tmr = new Timer();
+				TimerTask tTask = new TimerTask() {
+
+					@Override
+					public void run() {
+						mChangeImage(ChangeCount);
+
+						ChangeCount++;
+
+						if (ChangeCount == 6)
+							ChangeCount = 1;
+					}
+				};
+
+				tmr.schedule(tTask, 3000, 3000);
+				
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

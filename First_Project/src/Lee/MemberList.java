@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
 
 public class MemberList extends JFrame {
 
@@ -50,15 +52,15 @@ public class MemberList extends JFrame {
 		frame = new JFrame();
 		frame.setBounds(200, 200, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(new Color(15, 159, 78));
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 77, 755, 474);
 		frame.getContentPane().add(scrollPane);
 
 		table = new JTable();
-		table.setBackground(SystemColor.inactiveCaption);
 		table.setModel(new DefaultTableModel(
 				new Object[][] {
 						{ new Integer(1), "이순신", "\uC774\uC21C\uC2E0123", "1234", "\uC774\uC21C\uC2E0", "1",
@@ -78,6 +80,9 @@ public class MemberList extends JFrame {
 		scrollPane.setViewportView(table);
 
 		JButton btnNewButton = new JButton("회원번호로 찾기");
+		btnNewButton.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 98, 60));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FindNo((int) frame.getLocationOnScreen().getX() + 300,
@@ -88,6 +93,9 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("아이디로 찾기");
+		btnNewButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.setBackground(new Color(0, 98, 60));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FindId((int) frame.getLocationOnScreen().getX() + 300,
@@ -98,6 +106,9 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("이름으로 찾기");
+		btnNewButton_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
+		btnNewButton_2.setBackground(new Color(0, 98, 60));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FindName((int) frame.getLocationOnScreen().getX() + 300,
@@ -108,6 +119,9 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("닉네임으로 찾기");
+		btnNewButton_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_3.setForeground(new Color(255, 255, 255));
+		btnNewButton_3.setBackground(new Color(0, 98, 60));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FindNickname((int) frame.getLocationOnScreen().getX() + 300,
@@ -118,6 +132,9 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("삭제");
+		btnNewButton_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_4.setForeground(new Color(255, 255, 255));
+		btnNewButton_4.setBackground(new Color(0, 98, 60));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new MemberDelete((int) frame.getLocationOnScreen().getX() + 300,
@@ -128,6 +145,9 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton_4);
 
 		JButton btnNewButton_5 = new JButton("메뉴변경");
+		btnNewButton_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_5.setForeground(new Color(255, 255, 255));
+		btnNewButton_5.setBackground(new Color(0, 98, 60));
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new MenuChange();
@@ -138,10 +158,16 @@ public class MemberList extends JFrame {
 		frame.getContentPane().add(btnNewButton_5);
 
 		JButton btnNewButton_1_1 = new JButton("회원정보 조회");
+		btnNewButton_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_1_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1_1.setBackground(new Color(0, 98, 60));
 		btnNewButton_1_1.setBounds(121, 30, 125, 23);
 		frame.getContentPane().add(btnNewButton_1_1);
 
 		JButton btnNewButton_2_1 = new JButton("매출 조회");
+		btnNewButton_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_2_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_2_1.setBackground(new Color(0, 98, 60));
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new SalesList();
@@ -151,11 +177,10 @@ public class MemberList extends JFrame {
 		btnNewButton_2_1.setBounds(258, 30, 97, 23);
 		frame.getContentPane().add(btnNewButton_2_1);
 
-		JButton btnNewButton_4_1 = new JButton("홈");
-		btnNewButton_4_1.setBounds(789, 30, 57, 23);
-		frame.getContentPane().add(btnNewButton_4_1);
-
 		JButton btnNewButton_3_1 = new JButton("로그아웃");
+		btnNewButton_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_3_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_3_1.setBackground(new Color(0, 98, 60));
 		btnNewButton_3_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);

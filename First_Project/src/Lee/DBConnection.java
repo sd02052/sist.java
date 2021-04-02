@@ -12,9 +12,9 @@ public class DBConnection {
 
 		Connection conn = null;
 		try {
-			String user = "scott"; // 접속할 계정
-			String pw = "tiger"; // 계정 비
-			String url = "jdbc:oracle:thin:@localhost:59161:XE";
+			String user = "web"; // 접속할 계정
+			String pw = "1234"; // 계정 비
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			// 오라클 접속 @IP주소 :포트번호 :DB이름
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");

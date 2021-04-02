@@ -62,7 +62,7 @@ public class MemberLogin {
 				frame.dispose();
 			}
 		});
-		btnNewButton_4.setBounds(842, 54, 97, 84);
+		btnNewButton_4.setBounds(842, 54, 116, 84);
 		frame.getContentPane().add(btnNewButton_4);
 
 		JButton btnNewButton_3 = new JButton("\uD68C\uC6D0\uAC00\uC785");
@@ -83,7 +83,7 @@ public class MemberLogin {
 			}
 		});
 		btnNewButton_1.setFont(new Font("굴림", Font.PLAIN, 12));
-		btnNewButton_1.setBounds(485, 283, 100, 77);
+		btnNewButton_1.setBounds(485, 283, 116, 77);
 		frame.getContentPane().add(btnNewButton_1);
 
 		JButton btnLogin = new JButton("\uB85C\uADF8\uC778\r\n");
@@ -127,7 +127,7 @@ public class MemberLogin {
 
 		JLabel lblNewLabel = new JLabel("\uD584\uBC84\uAC70 \uD68C\uC6D0 \uB85C\uADF8\uC778");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 18));
+		lblNewLabel.setFont(new Font("나눔고딕 ExtraBold", Font.PLAIN, 18));
 		lblNewLabel.setBounds(341, 44, 260, 58);
 		frame.getContentPane().add(lblNewLabel);
 
