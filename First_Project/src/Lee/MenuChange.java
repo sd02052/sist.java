@@ -1,16 +1,10 @@
 package Lee;
 
-import java.awt.EventQueue;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import java.awt.Component;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class MenuChange {
@@ -22,40 +16,46 @@ public class MenuChange {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuChange window = new MenuChange();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MenuChange window = new MenuChange();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public MenuChange() {
-		initialize();
-	}
+//	public MenuChange() {
+//		initialize();
+//	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public MenuChange() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(new Color(15, 159, 78));
 		frame.setLocationRelativeTo(null);
 
+		// 컴포넌트
 		// 메뉴변경 버튼
 		JButton menuChangeBtn = new JButton("메뉴변경");
-		menuChangeBtn.setBounds(30, 30, 122, 35);
+		menuChangeBtn.setForeground(Color.WHITE);
+		menuChangeBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		menuChangeBtn.setBounds(30, 17, 122, 30);
 		frame.getContentPane().add(menuChangeBtn);
+		menuChangeBtn.setBackground(new Color(0, 98, 60));
+		menuChangeBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
 		// 회원정보조회 버튼
 		searchBtn = new JButton("회원정보조회");
@@ -65,8 +65,12 @@ public class MenuChange {
 				frame.dispose();
 			}
 		});
-		searchBtn.setBounds(164, 30, 122, 35);
+		searchBtn.setForeground(Color.WHITE);
+		searchBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		searchBtn.setBounds(164, 17, 122, 30);
 		frame.getContentPane().add(searchBtn);
+		searchBtn.setBackground(new Color(0, 98, 60));
+		searchBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
 		// 매출조회 버튼
 		JButton salesBtn = new JButton("매출조회");
@@ -76,13 +80,12 @@ public class MenuChange {
 				frame.dispose();
 			}
 		});
-		salesBtn.setBounds(298, 30, 122, 35);
+		salesBtn.setForeground(Color.WHITE);
+		salesBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		salesBtn.setBounds(298, 17, 122, 30);
 		frame.getContentPane().add(salesBtn);
-
-		// 홈 버튼
-		JButton homeBtn = new JButton("홈");
-		homeBtn.setBounds(765, 30, 90, 35);
-		frame.getContentPane().add(homeBtn);
+		salesBtn.setBackground(new Color(0, 98, 60));
+		salesBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
 		// 로그아웃 버튼
 		JButton logoutBtn = new JButton("로그아웃");
@@ -95,31 +98,62 @@ public class MenuChange {
 				}
 			}
 		});
-		logoutBtn.setBounds(867, 30, 90, 35);
+		logoutBtn.setForeground(Color.WHITE);
+		logoutBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		logoutBtn.setBounds(871, 17, 90, 30);
 		frame.getContentPane().add(logoutBtn);
+		logoutBtn.setBackground(new Color(0, 98, 60));
+		logoutBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
 		// 메뉴테이블
 		JScrollPane scroll = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.setBounds(31, 96, 623, 428);
+		scroll.setBounds(30, 66, 755, 474);
 		frame.getContentPane().add(scroll);
 
 		menuTable = new JTable();
-		menuTable.setModel(new DefaultTableModel(new Object[][] { { "빅맥", "5000원" }, { "1955버거", "6000원" },
-				{ "상하이버거", "5500원" }, { "베이컨토마토디럭스", "6500원" } }, new String[] { "\uBA54\uB274", "\uAC00\uACA9" }) {
-			Class[] columnTypes = new Class[] { String.class, Integer.class };
+		menuTable
+				.setModel(
+						new DefaultTableModel(
+								new Object[][] { { "아메리카노", "4100원" }, { "스타벅스 돌체라떼", "5600원" },
+										{ "바닐라 플랫 화이트", "5600원" }, { "자몽 허니 블랙 티", "5300원" } },
+								new String[] { "\uBA54\uB274", "\uAC00\uACA9" }) {
+							Class[] columnTypes = new Class[] { String.class, Integer.class };
 
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+							public Class getColumnClass(int columnIndex) {
+								return columnTypes[columnIndex];
+							}
+						});
 		scroll.setViewportView(menuTable);
 
 		// 메뉴수정 버튼
 		JButton changeBtn = new JButton("수    정");
-		changeBtn.setBounds(765, 96, 196, 42);
+		changeBtn.setForeground(Color.WHITE);
+		changeBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		changeBtn.setBounds(811, 66, 150, 35);
 		frame.getContentPane().add(changeBtn);
+		changeBtn.setBackground(new Color(0, 98, 60));
+		changeBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
+		// 메뉴삭제 버튼
+		JButton deleteBtn = new JButton("삭    제");
+		deleteBtn.setForeground(Color.WHITE);
+		deleteBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		deleteBtn.setBounds(811, 113, 150, 35);
+		frame.getContentPane().add(deleteBtn);
+		deleteBtn.setBackground(new Color(0, 98, 60));
+		deleteBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
+
+		// 메뉴추가 버튼
+		JButton addBtn = new JButton("추    가");
+		addBtn.setForeground(Color.WHITE);
+		addBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		addBtn.setBounds(811, 158, 150, 35);
+		frame.getContentPane().add(addBtn);
+		addBtn.setBackground(new Color(0, 98, 60));
+		addBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
+
+		// 이벤트
 		// 메뉴수정 버튼 이벤트
 		changeBtn.addActionListener(new ActionListener() {
 
@@ -132,13 +166,8 @@ public class MenuChange {
 			}
 		});
 
-		// 메뉴삭제 버튼
-		JButton deleteBtn = new JButton("삭    제");
-		deleteBtn.setBounds(765, 155, 196, 42);
-		frame.getContentPane().add(deleteBtn);
-
 		// 메뉴삭제 버튼 이벤트
-		deleteBtn.addActionListener(new ActionListener() { // ★★★★★★★★★★
+		deleteBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -146,13 +175,8 @@ public class MenuChange {
 			}
 		});
 
-		// 메뉴추가 버튼
-		JButton addBtn = new JButton("추    가");
-		addBtn.setBounds(765, 217, 196, 42);
-		frame.getContentPane().add(addBtn);
-
 		// 메뉴추가 버튼 이벤트
-		addBtn.addActionListener(new ActionListener() { // ★★★★★★★★★★
+		addBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -164,5 +188,7 @@ public class MenuChange {
 		});
 
 		frame.setVisible(true);
+
 	}
+
 }

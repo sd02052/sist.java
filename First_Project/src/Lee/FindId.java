@@ -1,12 +1,16 @@
 package Lee;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
@@ -52,11 +56,12 @@ public class FindId extends JFrame {
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-
+		panel.setBackground(new Color(12,159,78));
 		JLabel lbTitle = new JLabel("아이디를 입력하세요.");
 		panel.add(lbTitle);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(12,159,78));
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 
 		tfEnter = new JTextField();
@@ -64,9 +69,21 @@ public class FindId extends JFrame {
 		tfEnter.setColumns(10);
 
 		JButton btnFind = new JButton("찾기");
+		btnFind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		panel_1.add(btnFind);
+		btnFind.setForeground(Color.WHITE);
+		btnFind.setFont(new Font("맑은 고딕", Font.BOLD, 14));
+		btnFind.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
+		btnFind.setBackground(new Color(0, 98, 60));
 
 		JButton btnClose = new JButton("닫기");
+		btnClose.setForeground(Color.WHITE);
+		btnClose.setFont(new Font("맑은 고딕", Font.BOLD, 14));
+		btnClose.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
+		btnClose.setBackground(new Color(0, 98, 60));
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -76,6 +93,7 @@ public class FindId extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
+		panel_2.setBackground(new Color(12,159,78));
 		panel_2.setLayout(new GridLayout(6, 2, 0, 0));
 
 		JLabel lbNo = new JLabel("회원번호 : ");
