@@ -2,27 +2,25 @@ package Lee;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConnection {
 
-	public static Connection dbConn;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 
-	public static Connection getConnection() {
-
-		Connection conn = null;
+	public void connect() {
 		try {
-			String user = "web"; // 접속할 계정
-			String pw = "1234"; // 계정 비
+			String user = "web";
+			String pw = "1234";
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			// 오라클 접속 @IP주소 :포트번호 :DB이름
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// JDBC 드라이버 (ojdbc6.jar)로딩. 실패시 ClassNotFoudException발생
-			// 프로젝트-Properties에서 JDBC라이브러리 추가해줘야함.
-			conn = DriverManager.getConnection(url, user, pw);
-			// 입력된 오라클 계정에 접속. 실패시 SQLEXception발생.
-			// getConnection( ) 메서드는 Connection을 반환한다.
+
+			con = DriverManager.getConnection(url, user, pw);
 
 			System.out.println("Data베이스에 연결되었습니다.");
 
@@ -34,6 +32,18 @@ public class DBConnection {
 			System.out.println("Unkonwn error");
 			e.printStackTrace();
 		}
-		return conn;
 	}
+
+	public void disconnect() {
+		try {
+			rs.close();
+			pstmt.close();
+			con.close();
+			System.out.println("DB 연결 종료.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
