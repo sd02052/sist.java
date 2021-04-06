@@ -84,6 +84,7 @@ public class DEPT extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				connect(); // DB 연동하는 메서드 호출
+				model.setRowCount(0);
 				select(); // 전체 내역을 조회하는 메서드 호출
 			}
 		});

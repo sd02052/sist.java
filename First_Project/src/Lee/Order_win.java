@@ -2,9 +2,11 @@ package Lee;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class Order_win extends JFrame {
 
@@ -13,10 +15,11 @@ public class Order_win extends JFrame {
 	private JTable table_1;
 	private JTextField textField;
 	private JTextField textField_1;
-
-	// btnNewButton_1, btnNewButton_2 btnNewButton_3 btnNewButton_4
-	// btnNewButton_1_1, btnNewButton_2_1 btnNewButton_3_1 btnNewButton_4_1
-	// home_button logout_button orderUP orderDown payment usePoint
+	private Color backColor = new Color(15, 159, 78);
+	private Color buttonColor = new Color(0, 98, 60);
+	private Color fontColor = new Color(255, 255, 255);
+	private Font font = new Font("맑은 고딕", Font.BOLD, 20);
+	private Font font1 = new Font("맑은 고딕", Font.BOLD, 16);
 
 	public Order_win() {
 
@@ -27,6 +30,7 @@ public class Order_win extends JFrame {
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(backColor);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -75,7 +79,10 @@ public class Order_win extends JFrame {
 				dispose();
 			}
 		});
-		home_button.setBounds(23, 6, 117, 29);
+		home_button.setBounds(25, 17, 90, 30);
+		home_button.setForeground(fontColor);
+		home_button.setBackground(buttonColor);
+		home_button.setFont(font1);
 		contentPane.add(home_button);
 
 		JButton logout_button = new JButton("로그아웃");
@@ -88,7 +95,11 @@ public class Order_win extends JFrame {
 				}
 			}
 		});
-		logout_button.setBounds(864, 6, 117, 29);
+		logout_button.setBounds(871, 17, 90, 30);
+		logout_button.setForeground(fontColor);
+		logout_button.setBackground(buttonColor);
+		logout_button.setFont(font1);
+		logout_button.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 		contentPane.add(logout_button);
 
 		// 메뉴 수량 버튼 ( +, - )
@@ -96,11 +107,17 @@ public class Order_win extends JFrame {
 		JButton orderUP = new JButton("+");
 		orderUP.setIcon(null);
 		orderUP.setBounds(525, 430, 50, 50);
+		orderUP.setBackground(buttonColor);
+		orderUP.setForeground(fontColor);
+		orderUP.setFont(font);
 		contentPane.add(orderUP);
 
 		JButton orderDown = new JButton("-");
 		orderDown.setIcon(null);
 		orderDown.setBounds(525, 490, 50, 50);
+		orderDown.setFont(font);
+		orderDown.setBackground(buttonColor);
+		orderDown.setForeground(fontColor);
 		contentPane.add(orderDown);
 
 		// 총 금액
@@ -120,18 +137,35 @@ public class Order_win extends JFrame {
 		// 현금 결제 버튼
 		JButton usePoint = new JButton("포인트 사용");
 		usePoint.setBounds(779, 430, 159, 50);
+		usePoint.setBackground(buttonColor);
+		usePoint.setForeground(fontColor);
+		usePoint.setFont(font1);
 		contentPane.add(usePoint);
 
 		// 카드 결제 버튼
 		JButton payment = new JButton("결제 하기");
 		payment.setBounds(779, 490, 159, 50);
+		payment.setBackground(buttonColor);
+		payment.setForeground(fontColor);
+		payment.setFont(font1);
 		contentPane.add(payment);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(59, 415, 442, 125);
+		contentPane.add(scrollPane);
+		
+				// 주문 확인 테이블
+		
+				table_1 = new JTable();
+				scrollPane.setViewportView(table_1);
+				table_1.setModel(new DefaultTableModel(new Object[][] { { "카페라떼", 2, 10000 } },
+						new String[] { "\uC81C\uD488\uBA85", "\uC218\uB7C9", "\uAC00\uACA9" }) {
+					Class[] columnTypes = new Class[] { String.class, Integer.class, Integer.class };
 
-		// 주문 확인 테이블
-
-		table_1 = new JTable();
-		table_1.setBounds(62, 420, 442, 125);
-		contentPane.add(table_1);
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+				});
 
 		setVisible(true);
 
@@ -142,9 +176,7 @@ public class Order_win extends JFrame {
 		// 포인트 사용 버튼 이벤트
 		usePoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				new PayPoint();
-
 			}
 		});
 
@@ -154,19 +186,6 @@ public class Order_win extends JFrame {
 				new AskPayment();
 			}
 		});
-
-		/*
-		 * 만들어야 하는 이벤트
-		 * 
-		 * 1. 홈 버튼 -> 홈 화면 이동 2. 로그아웃 버튼 -> 로그인 창 이동 3. + , - 버튼 주문 수량 변경
-		 * 
-		 */
-
-	}
-
-	public static void main(String[] args) {
-
-		new Order_win();
 
 	}
 }

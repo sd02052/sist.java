@@ -17,6 +17,7 @@ public class MemberHome {
 	private JLabel nicknameLbl; // 고객님! Label
 	private JLabel mainLbl2; // 사용가능 포인트 Label
 	private JLabel pointLbl; // p(포인트) Label
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -129,7 +130,7 @@ public class MemberHome {
 		nicknameLbl.setForeground(Color.WHITE);
 		nicknameLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		nicknameLbl.setFont(new Font("맑은 고딕", Font.BOLD, 25));
-		nicknameLbl.setBounds(121, 130, 223, 28);
+		nicknameLbl.setBounds(221, 130, 114, 28);
 		frame.getContentPane().add(nicknameLbl);
 
 		// 사용가능 포인트 text
@@ -196,6 +197,8 @@ public class MemberHome {
 		JButton orderBtn = new JButton("주문");
 		orderBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new Order_win();
+				frame.dispose();
 
 			}
 		});
@@ -205,6 +208,13 @@ public class MemberHome {
 		frame.getContentPane().add(orderBtn);
 		orderBtn.setBackground(new Color(0, 98, 60));
 		orderBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
+
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		lblNewLabel.setBackground(new Color(0, 98, 60));
+		lblNewLabel.setBounds(117, 136, 114, 28);
+		frame.getContentPane().add(lblNewLabel);
 
 		// 이벤트
 		// 정보수정 버튼 이벤트
