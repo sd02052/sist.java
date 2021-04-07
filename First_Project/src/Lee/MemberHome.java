@@ -99,7 +99,7 @@ public class MemberHome {
 
 		// p(포인트) text
 		int mileage = 0; // 마일리지 변수선언
-		pointLbl = new JLabel(mileage + "p");
+		pointLbl = new JLabel(MemberLogin.member.getMileage() + "p");
 		pointLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		pointLbl.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		pointLbl.setForeground(Color.WHITE);
