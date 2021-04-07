@@ -8,6 +8,8 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 
+import DTO.MemberDAO;
+
 public class MemberHome {
 
 	private JFrame frame;
@@ -163,7 +165,7 @@ public class MemberHome {
 		orderBtn.setBackground(new Color(0, 98, 60));
 		orderBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
-		lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel(MemberLogin.member.getName());
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		lblNewLabel.setBackground(new Color(0, 98, 60));

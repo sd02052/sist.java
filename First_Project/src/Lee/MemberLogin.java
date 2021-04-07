@@ -1,11 +1,25 @@
 package Lee;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
-import java.awt.event.*;
-import javax.swing.*;
+import DTO.MemberDTO;
 
 public class MemberLogin extends JFrame {
 
@@ -13,6 +27,7 @@ public class MemberLogin extends JFrame {
 	private JTextField txtId;
 	private JPasswordField passwordField_1;
 	private JPanel panel;
+	static MemberDTO member;
 
 	public MemberLogin() {
 
@@ -80,8 +95,26 @@ public class MemberLogin extends JFrame {
 		JButton btnNewButton_7 = new JButton("\uB85C\uADF8\uC778"); // 로그인 버튼
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MemberHome();
-				frame.dispose();
+//				int res = login(txtId.getText(), passwordField_1.getText());
+//				if (res == 1) {
+//					new MemberHome();
+//					frame.dispose();
+//				} else if (res == 0) {
+//					JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
+//				} else if (res == -1) {
+//					JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다.");
+//				}
+
+				int res = login(txtId.getText(), passwordField_1.getText());
+				if (res == 1) {
+					mb(txtId.getText());
+					new MemberHome();
+					frame.dispose();
+				} else if (res == 0) {
+					JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
+				} else if (res == -1) {
+					JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다.");
+				}
 			}
 		});
 		btnNewButton_7.setForeground(Color.WHITE);
@@ -119,6 +152,49 @@ public class MemberLogin extends JFrame {
 		panel.add(lbl);
 
 		frame.setVisible(true);
+
+	}
+
+	public int login(String id, String pwd) {
+		int state = 1;
+		String pass = "";
+		try {
+			String sql = "select * from member where mem_id = ?";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.pstmt.setString(1, id);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			if (Main.db.rs.next()) {
+				pass = Main.db.rs.getString("mem_pwd");
+				System.out.println(pass);
+				if (pass.equals(pwd)) {
+					state = 1;
+				} else {
+					state = 0;
+				}
+			} else {
+				state = -1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return state;
+	}
+
+	public void mb(String id) {
+		try {
+			String sql = "select * from member where mem_id = ?";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.pstmt.setString(1, id);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+			while (Main.db.rs.next()) {
+				member = new MemberDTO(Main.db.rs.getInt(1), Main.db.rs.getString(2), Main.db.rs.getString(3),
+						Main.db.rs.getString(4), Main.db.rs.getString(5), Main.db.rs.getInt(6));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 }

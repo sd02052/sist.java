@@ -9,6 +9,15 @@ public class MemberDTO {
 	private String pass;
 	private int mileage;
 
+	public MemberDTO(int no, String name, String nickname, String id, String pass, int mileage) {
+		this.no = no;
+		this.name = name;
+		this.nickName = nickname;
+		this.id = id;
+		this.pass = pass;
+		this.mileage = mileage;
+	}
+
 	public int getNo() {
 		return no;
 	}

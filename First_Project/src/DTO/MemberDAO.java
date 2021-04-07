@@ -1,5 +1,7 @@
 package DTO;
 
+import Lee.Main;
+
 public class MemberDAO {
 
 	private static MemberDAO instace = null;
@@ -13,4 +15,5 @@ public class MemberDAO {
 		}
 		return instace;
 	}
+
 }

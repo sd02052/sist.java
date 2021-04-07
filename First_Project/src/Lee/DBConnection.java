@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	public Connection con = null;
+	public PreparedStatement pstmt = null;
+	public ResultSet rs = null;
 
 	public void connect() {
 		try {
@@ -30,18 +30,6 @@ public class DBConnection {
 			System.out.println("DB 접속실패:" + sqle.toString());
 		} catch (Exception e) {
 			System.out.println("Unkonwn error");
-			e.printStackTrace();
-		}
-	}
-
-	public void disconnect() {
-		try {
-			rs.close();
-			pstmt.close();
-			con.close();
-			System.out.println("DB 연결 종료.");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
