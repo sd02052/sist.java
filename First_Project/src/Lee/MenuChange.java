@@ -13,32 +13,6 @@ public class MenuChange {
 	private JTable menuTable;
 	private JButton searchBtn;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					MenuChange window = new MenuChange();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
-//	public MenuChange() {
-//		initialize();
-//	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public MenuChange() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 600);
@@ -93,7 +67,7 @@ public class MenuChange {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					new ManagerLogin();
+					new AdminLogin();
 					frame.dispose();
 				}
 			}

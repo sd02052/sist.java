@@ -1,6 +1,6 @@
 package DTO;
 
-public class ManagerDTO {
+public class AdminDTO {
 	private String id;
 	private String pass;
 

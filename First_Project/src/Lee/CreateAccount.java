@@ -1,133 +1,173 @@
 package Lee;
 
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+import java.awt.ComponentOrientation;
+import javax.swing.JPasswordField;
 
 public class CreateAccount {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtId;
+	private JTextField txtName;
+	private JTextField txtNickname;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
+	private JPanel panel;
 
-	/**
-	 * Launch the application.
-	 * 
-	 * @wbp.parser.entryPoint
-	 */
-	public static void main(String[] args) {
-		/*
-		 * EventQueue.invokeLater(new Runnable() { public void run() { try {
-		 * CreateAccount window = new CreateAccount(); window.frame.setVisible(true); }
-		 * catch (Exception e) { e.printStackTrace(); } } });
-		 */
-		new CreateAccount();
-	}
-
-	/**
-	 * Create the application.
-	 */
-	/*
-	 * public CreateAccount() { initialize(); }
-	 */
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public CreateAccount() {
-		frame = new JFrame();
+		frame = new JFrame(); // 프레임 설정
 		frame.setBounds(100, 100, 1000, 600);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Color c = new Color(15, 159, 78);
+		frame.getContentPane().setBackground(c);
 
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setColumns(10);
-		textField.setBounds(360, 203, 225, 42);
-		frame.getContentPane().add(textField);
+		txtId = new JTextField(); // ID 텍스트 필드
+		txtId.setForeground(Color.BLACK);
+		txtId.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				txtId.setText("");
+			}
 
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setColumns(10);
-		textField_1.setBounds(360, 140, 225, 42);
-		frame.getContentPane().add(textField_1);
+		});
+		txtId.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		txtId.setBackground(Color.WHITE);
+		txtId.setBounds(681, 128, 225, 42);
+		txtId.setHorizontalAlignment(SwingConstants.LEFT);
+		txtId.setColumns(10);
+		frame.getContentPane().add(txtId);
 
-		textField_2 = new JTextField();
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setColumns(10);
-		textField_2.setBounds(360, 270, 225, 42);
-		frame.getContentPane().add(textField_2);
+		txtName = new JTextField(); // 이름 텍스트 필드
+		txtName.setForeground(Color.BLACK);
+		txtName.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				txtName.setText("");
+			}
 
-		textField_3 = new JTextField();
-		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_3.setColumns(10);
-		textField_3.setBounds(360, 337, 225, 42);
-		frame.getContentPane().add(textField_3);
+		});
+		txtName.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		txtName.setBackground(Color.WHITE);
+		txtName.setBounds(681, 290, 225, 42);
+		txtName.setHorizontalAlignment(SwingConstants.LEFT);
+		txtName.setColumns(10);
+		frame.getContentPane().add(txtName);
 
-		JLabel lblNewLabel = new JLabel("\uC0C8 \uACC4\uC815 \uC0DD\uC131");
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 18));
+		txtNickname = new JTextField(); // 닉네임 텍스트 필드
+		txtNickname.setForeground(Color.BLACK);
+		txtNickname.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				txtNickname.setText("");
+			}
+
+		});
+		txtNickname.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		txtNickname.setBackground(Color.WHITE);
+		txtNickname.setBounds(681, 344, 225, 42);
+		txtNickname.setHorizontalAlignment(SwingConstants.LEFT);
+		txtNickname.setColumns(10);
+		frame.getContentPane().add(txtNickname);
+
+		JLabel lblNewLabel = new JLabel("\uACC4\uC815 \uC0DD\uC131"); // 새 계정 생성 라벨
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(605, 42, 260, 58);
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 50));
+		lblNewLabel.setBackground(new Color(0, 98, 60));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(341, 44, 260, 58);
 		frame.getContentPane().add(lblNewLabel);
 
-		JButton btnNewButton = new JButton("\uACC4\uC815 \uC0DD\uC131");
-		btnNewButton.setBounds(360, 420, 225, 77);
+		JButton btnNewButton = new JButton("\uD655\uC778"); // 계정 생성 버튼
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		btnNewButton.setBackground(new Color(0, 98, 60));
+		btnNewButton.setBounds(625, 425, 225, 77);
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "계정이 생성되었습니다.");
+				frame.dispose();
+				new MemberLogin();
+
+			}
+		});
 		frame.getContentPane().add(btnNewButton);
 
-		JButton btnBack = new JButton("BACK");
-		btnBack.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("\uFF1C"); // 뒤로가기 버튼
+		btnBack.setForeground(Color.WHITE);
+		btnBack.setFont(new Font("맑은 고딕", Font.BOLD, 50));
+		btnBack.setBackground(new Color(15, 159, 78));
+		btnBack.setBounds(27, 17, 90, 83);
+		btnBack.addActionListener(new ActionListener() { // 뒤로가기 이벤트
 			public void actionPerformed(ActionEvent e) {
 				new MemberLogin();
 				frame.dispose();
 			}
 		});
-		btnBack.setBounds(43, 31, 97, 84);
 		frame.getContentPane().add(btnBack);
 
-		textField_4 = new JTextField();
-		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_4.setColumns(10);
-		textField_4.setBounds(712, 203, 225, 42);
-		frame.getContentPane().add(textField_4);
+		passwordField = new JPasswordField(); // 비밀번호 입력
+		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
+		passwordField.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		passwordField.setBackground(Color.WHITE);
+		passwordField.setBounds(681, 180, 225, 42);
+		frame.getContentPane().add(passwordField);
 
-		JLabel lblNewLabel_9 = new JLabel("ID");
-		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9.setBounds(200, 140, 121, 42);
-		frame.getContentPane().add(lblNewLabel_9);
+		passwordField_1 = new JPasswordField(); // 비밀번호 입력 확인
+		passwordField_1.setHorizontalAlignment(SwingConstants.LEFT);
+		passwordField_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		passwordField_1.setBackground(Color.WHITE);
+		passwordField_1.setBounds(681, 232, 225, 42);
+		frame.getContentPane().add(passwordField_1);
 
-		JLabel lblNewLabel_9_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lblNewLabel_9_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9_1.setBounds(200, 202, 121, 42);
-		frame.getContentPane().add(lblNewLabel_9_1);
+		panel = new JPanel(); // 배경 이미지 삽입
+		panel.setBounds(117, 145, 413, 319);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		JLabel lbl = new JLabel(new ImageIcon("Image/main.jpg"));
+		lbl.setBounds(-35, -21, 476, 374);
+		panel.add(lbl);
 
-		JLabel lblNewLabel_9_2 = new JLabel("\uC774\uB984\r\n");
-		lblNewLabel_9_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9_2.setBounds(200, 270, 121, 42);
-		frame.getContentPane().add(lblNewLabel_9_2);
+		JLabel lblId = new JLabel("아이디 : ");
+		lblId.setBounds(616, 144, 53, 15);
+		frame.getContentPane().add(lblId);
 
-		JLabel lblNewLabel_9_3 = new JLabel("\uD734\uB300\uD3F0 \uBC88\uD638");
-		lblNewLabel_9_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9_3.setBounds(200, 337, 121, 42);
-		frame.getContentPane().add(lblNewLabel_9_3);
+		JLabel lblPassword = new JLabel("비밀번호 : ");
+		lblPassword.setBounds(604, 196, 65, 15);
+		frame.getContentPane().add(lblPassword);
 
-		JLabel lblNewLabel_9_4 = new JLabel("\uBE44\uBC00\uBC88\uD638 \uD655\uC778\r\n");
-		lblNewLabel_9_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9_4.setBounds(597, 203, 97, 42);
-		frame.getContentPane().add(lblNewLabel_9_4);
+		JLabel lblId_1 = new JLabel("비밀번호 확인 : ");
+		lblId_1.setBounds(579, 248, 90, 15);
+		frame.getContentPane().add(lblId_1);
+
+		JLabel lblId_1_1 = new JLabel("이름 : ");
+		lblId_1_1.setBounds(627, 306, 42, 15);
+		frame.getContentPane().add(lblId_1_1);
+
+		JLabel lblId_1_2 = new JLabel("닉네임 : ");
+		lblId_1_2.setBounds(616, 360, 53, 15);
+		frame.getContentPane().add(lblId_1_2);
 
 		frame.setVisible(true);
-	}
 
+	}
 }

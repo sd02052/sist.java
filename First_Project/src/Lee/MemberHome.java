@@ -19,41 +19,6 @@ public class MemberHome {
 	private JLabel pointLbl; // p(포인트) Label
 	private JLabel lblNewLabel;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//
-//		// 광고 이미지 타이머 메서드
-//		Timer tmr = new Timer();
-//		TimerTask tTask = new TimerTask() {
-//
-//			@Override
-//			public void run() {
-//				mChangeImage(ChangeCount);
-//
-//				ChangeCount++;
-//
-//				if (ChangeCount == 6)
-//					ChangeCount = 1;
-//			}
-//		};
-//
-//		tmr.schedule(tTask, 3000, 3000);
-//		//
-//
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					MemberHome window = new MemberHome();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	// 광고 이미지 변환 메서드
 	private static void mChangeImage(int Value) {
 		ImageIcon Path = null;
@@ -76,18 +41,7 @@ public class MemberHome {
 
 		imageLbl.setIcon(changeIcon1);
 	}
-	//
 
-	/**
-	 * Create the application.
-	 */
-//	public MemberHome() {
-//		initialize();
-//	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public MemberHome() {
 
 		// 광고 이미지 타이머 메서드

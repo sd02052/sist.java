@@ -22,46 +22,21 @@ public class FindId extends JFrame {
 	private JFrame frame;
 	private JTextField tfEnter;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					FindNo window = new FindNo();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
-//	public FindNo() {
-//		initialize();
-//	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	public FindId(int x, int y) {
+	public FindId() {
 		frame = new JFrame();
-		frame.setBounds(x, y, 300, 200);
+		frame.setBounds(100, 100, 300, 200);
 		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.setLocationRelativeTo(null);
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setBackground(new Color(12,159,78));
+		panel.setBackground(new Color(12, 159, 78));
 		JLabel lbTitle = new JLabel("아이디를 입력하세요.");
 		panel.add(lbTitle);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(12,159,78));
+		panel_1.setBackground(new Color(12, 159, 78));
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 
 		tfEnter = new JTextField();
@@ -93,7 +68,7 @@ public class FindId extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
-		panel_2.setBackground(new Color(12,159,78));
+		panel_2.setBackground(new Color(12, 159, 78));
 		panel_2.setLayout(new GridLayout(6, 2, 0, 0));
 
 		JLabel lbNo = new JLabel("회원번호 : ");

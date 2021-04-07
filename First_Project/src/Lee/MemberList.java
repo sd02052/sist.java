@@ -21,34 +21,6 @@ public class MemberList extends JFrame {
 	private JFrame frame;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					MemberFind window = new MemberFind();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//
-//		new MemberList();
-//	}
-
-	/**
-	 * Create the application.
-	 */
-//	public MemberFind() {
-//		initialize();
-//	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public MemberList() {
 		frame = new JFrame();
 		frame.setBounds(200, 200, 1000, 600);
@@ -86,8 +58,7 @@ public class MemberList extends JFrame {
 		btnNewButton.setBackground(new Color(0, 98, 60));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FindNo((int) frame.getLocationOnScreen().getX() + 300,
-						(int) frame.getLocationOnScreen().getY() + 200);
+				new FindNo();
 			}
 		});
 		btnNewButton.setBounds(813, 66, 142, 31);
@@ -99,8 +70,7 @@ public class MemberList extends JFrame {
 		btnNewButton_1.setBackground(new Color(0, 98, 60));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FindId((int) frame.getLocationOnScreen().getX() + 300,
-						(int) frame.getLocationOnScreen().getY() + 200);
+				new FindId();
 			}
 		});
 		btnNewButton_1.setBounds(813, 107, 142, 31);
@@ -112,8 +82,7 @@ public class MemberList extends JFrame {
 		btnNewButton_2.setBackground(new Color(0, 98, 60));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FindName((int) frame.getLocationOnScreen().getX() + 300,
-						(int) frame.getLocationOnScreen().getY() + 200);
+				new FindName();
 			}
 		});
 		btnNewButton_2.setBounds(813, 148, 142, 31);
@@ -125,8 +94,7 @@ public class MemberList extends JFrame {
 		btnNewButton_3.setBackground(new Color(0, 98, 60));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FindNickname((int) frame.getLocationOnScreen().getX() + 300,
-						(int) frame.getLocationOnScreen().getY() + 200);
+				new FindNickname();
 			}
 		});
 		btnNewButton_3.setBounds(813, 189, 142, 31);
@@ -186,7 +154,7 @@ public class MemberList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					new ManagerLogin();
+					new AdminLogin();
 					frame.dispose();
 				}
 			}

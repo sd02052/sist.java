@@ -21,33 +21,6 @@ public class SalesList extends JFrame {
 	private JFrame frame;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					SalesList window = new SalesList();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//		new SalesList();
-//	}
-
-	/**
-	 * Create the application.
-	 */
-//	public SalesList() {
-//		initialize();
-//	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public SalesList() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(15, 159, 78));
@@ -158,7 +131,7 @@ public class SalesList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					new ManagerLogin();
+					new AdminLogin();
 					frame.dispose();
 				}
 			}

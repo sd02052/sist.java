@@ -13,22 +13,6 @@ public class MenuAddPopup extends JDialog {
 	private JTextField menuText;
 	private JTextField priceText;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			MenuAddPopup dialog = new MenuAddPopup();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public MenuAddPopup() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

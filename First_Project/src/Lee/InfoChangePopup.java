@@ -13,22 +13,6 @@ public class InfoChangePopup extends JDialog {
 	private JTextField nickText;
 	private JTextField pwText;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			InfoChangePopup dialog = new InfoChangePopup();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public InfoChangePopup() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
