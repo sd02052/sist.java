@@ -20,6 +20,7 @@ public class MemberList extends JFrame {
 
 	private JFrame frame;
 	private JTable table;
+	private DefaultTableModel model;
 
 	public MemberList() {
 		frame = new JFrame();
@@ -33,24 +34,11 @@ public class MemberList extends JFrame {
 		scrollPane.setBounds(30, 66, 755, 474);
 		frame.getContentPane().add(scrollPane);
 
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-						{ new Integer(1), "이순신", "\uC774\uC21C\uC2E0123", "1234", "\uC774\uC21C\uC2E0", "1",
-								new Integer(1) },
-						{ new Integer(2), "김연아", "2", "5678", "2", "2", new Integer(2) },
-						{ new Integer(3), "세종대왕", "3", "1234", "3", "3", new Integer(5000) }, },
-				new String[] { "\uD68C\uC6D0\uBC88\uD638", "\uC774\uB984", "\uC544\uC774\uB514",
-						"\uBE44\uBC00\uBC88\uD638", "\uB2C9\uB124\uC784", "\uBE44\uBC00\uBC88\uD638",
-						"\uB9C8\uC77C\uB9AC\uC9C0" }) {
-			Class[] columnTypes = new Class[] { Integer.class, String.class, String.class, String.class, String.class,
-					String.class, Integer.class };
-
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		model = new DefaultTableModel(new String[] { "회원번호", "이름", "닉네임", "아이디", "비밀번호", "포인트" }, 0);
+		table = new JTable(model);
 		scrollPane.setViewportView(table);
+		model.setRowCount(0);
+		memberSelect();
 
 		JButton btnNewButton = new JButton("회원번호로 찾기");
 		btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 12));
@@ -106,8 +94,11 @@ public class MemberList extends JFrame {
 		btnNewButton_4.setBackground(new Color(0, 98, 60));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MemberDelete((int) frame.getLocationOnScreen().getX() + 300,
-						(int) frame.getLocationOnScreen().getY() + 200);
+				int result = JOptionPane.showConfirmDialog(null,
+						model.getValueAt(table.getSelectedRow(), 1) + "고객을 삭제하시겠습니까?", "", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					memberDelete();
+				}
 			}
 		});
 		btnNewButton_4.setBounds(884, 509, 71, 31);
@@ -169,4 +160,51 @@ public class MemberList extends JFrame {
 		frame.setVisible(true);
 	}
 
+	private void memberSelect() {
+
+		try {
+			String sql = "select * from member order by mem_no";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				int mem_no = Main.db.rs.getInt("mem_no");
+				String mem_name = Main.db.rs.getString("mem_name");
+				String mem_nick = Main.db.rs.getString("mem_nick");
+				String mem_id = Main.db.rs.getString("mem_id");
+				String mem_pwd = Main.db.rs.getString("mem_pwd");
+				int mem_point = Main.db.rs.getInt("mem_point");
+
+				Object[] data = { mem_no, mem_name, mem_nick, mem_id, mem_pwd, mem_point };
+
+				model.addRow(data);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void memberDelete() {
+
+		try {
+			String sql = "delete from member where mem_no = ?";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			int row = table.getSelectedRow();
+
+			Main.db.pstmt.setInt(1, (int) model.getValueAt(row, 0));
+
+			int result = Main.db.pstmt.executeUpdate();
+
+			model.removeRow(row);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

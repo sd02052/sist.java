@@ -80,9 +80,16 @@ public class MemberHome {
 		mainLbl.setBounds(121, 92, 223, 28);
 		frame.getContentPane().add(mainLbl);
 
+		// 로그인한 손님 이름출력
+		lblNewLabel = new JLabel(MemberLogin.member.getName());
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+		lblNewLabel.setBackground(new Color(0, 98, 60));
+		lblNewLabel.setBounds(117, 136, 114, 28);
+		frame.getContentPane().add(lblNewLabel);
+
 		// 고객님! text
-		String nickname = ""; // 닉네임 변수선언
-		nicknameLbl = new JLabel(nickname + "고객님!");
+		nicknameLbl = new JLabel("고객님!");
 		nicknameLbl.setForeground(Color.WHITE);
 		nicknameLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		nicknameLbl.setFont(new Font("맑은 고딕", Font.BOLD, 25));
@@ -164,13 +171,6 @@ public class MemberHome {
 		frame.getContentPane().add(orderBtn);
 		orderBtn.setBackground(new Color(0, 98, 60));
 		orderBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
-
-		lblNewLabel = new JLabel(MemberLogin.member.getName());
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		lblNewLabel.setBackground(new Color(0, 98, 60));
-		lblNewLabel.setBounds(117, 136, 114, 28);
-		frame.getContentPane().add(lblNewLabel);
 
 		// 이벤트
 		// 정보수정 버튼 이벤트
