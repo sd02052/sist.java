@@ -71,24 +71,70 @@ public class MenuAddPopup extends JDialog {
 		// 이벤트
 		// 확인 버튼 이벤트
 		confirmButton.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				add();
+				MenuChange.model.setRowCount(0);
+				select();
+				dispose();
 			}
 		});
 
 		// 취소 버튼 이벤트
 		cancelButton.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-
 			}
 		});
 
 		setVisible(true);
 	}
 
+	// 테이블에 메뉴리스트 보여주는 메서드
+	public void select() {
+
+		try {
+			String sql = "select * from menu";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				String menuName = Main.db.rs.getString("menu_name");
+				int menuPrice = Main.db.rs.getInt("menu_price");
+
+				Object[] data = { menuName, menuPrice };
+
+				MenuChange.model.addRow(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 메뉴추가 메서드
+	private void add() {
+
+		try {
+			String sql = "insert into menu values(?, ?)";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			String menuName = menuText.getText();
+			int menuPrice = Integer.parseInt(priceText.getText());
+
+			Main.db.pstmt.setString(1, menuName);
+			Main.db.pstmt.setInt(2, menuPrice);
+
+			int result = Main.db.pstmt.executeUpdate();
+
+			if (result > 0) {
+				JOptionPane.showMessageDialog(null, "메뉴를 추가하였습니다.");
+			} else {
+				JOptionPane.showConfirmDialog(null, "메뉴 추가에 실패하였습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -102,12 +102,8 @@ public class CreateAccount {
 		btnNewButton.setBackground(new Color(0, 98, 60));
 		btnNewButton.setBounds(625, 425, 225, 77);
 		btnNewButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "계정이 생성되었습니다.");
-				frame.dispose();
-				new MemberLogin();
-
+				insert();
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
@@ -170,4 +166,87 @@ public class CreateAccount {
 		frame.setVisible(true);
 
 	}
+
+	// 회원 추가
+	private void insert() {
+
+		try {
+			if (txtId.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.");
+			} else if (passwordField.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.");
+			} else if (passwordField_1.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요.");
+			} else if (checkPass() == false) {
+				JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+			} else if (txtName.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
+			} else if (txtNickname.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "닉네임을 입력해주세요.");
+			} else if (checkId() == 1) {
+				JOptionPane.showMessageDialog(null, "해당 Id는 이미 존재합니다.");
+			} else {
+				String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?)";
+
+				Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+				String memName = txtName.getText();
+				String memNick = txtNickname.getText();
+				String memId = txtId.getText();
+				String memPwd = passwordField.getText();
+				int memPoint = 0;
+
+				Main.db.pstmt.setString(1, memName);
+				Main.db.pstmt.setString(2, memNick);
+				Main.db.pstmt.setString(3, memId);
+				Main.db.pstmt.setString(4, memPwd);
+				Main.db.pstmt.setInt(5, memPoint);
+
+				int result = Main.db.pstmt.executeUpdate();
+				if (result > 0) {
+					JOptionPane.showMessageDialog(null, "회원가입에 성공하였습니다.");
+					frame.dispose();
+					new MemberLogin();
+
+				} else {
+					JOptionPane.showMessageDialog(null, "회원가입에 실패 했습니다.");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 아이디 중복 체크
+	private int checkId() {
+
+		int state = 0;
+
+		try {
+
+			String sql = "select * from member where mem_id = ?";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.pstmt.setString(1, txtId.getText());
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			if (Main.db.rs.next() == true) {
+				state = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return state;
+	}
+
+	// 비밀번호랑 비밀번호확인 텍스트필드가 같은지 검사
+	private boolean checkPass() {
+		if (passwordField.getText().equals(passwordField_1.getText())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

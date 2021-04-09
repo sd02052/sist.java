@@ -94,10 +94,16 @@ public class MemberList extends JFrame {
 		btnNewButton_4.setBackground(new Color(0, 98, 60));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null,
-						model.getValueAt(table.getSelectedRow(), 1) + "고객을 삭제하시겠습니까?", "", JOptionPane.YES_NO_OPTION);
-				if (result == JOptionPane.YES_OPTION) {
-					memberDelete();
+
+				if (table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(null, "삭제할 고객을 선택하세요.");
+				} else {
+					int result = JOptionPane.showConfirmDialog(null,
+							model.getValueAt(table.getSelectedRow(), 1) + "고객을 삭제하시겠습니까?", "",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION) {
+						memberDelete();
+					}
 				}
 			}
 		});

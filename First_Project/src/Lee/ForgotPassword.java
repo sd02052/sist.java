@@ -129,4 +129,5 @@ public class ForgotPassword {
 
 		frame.setVisible(true);
 	}
+
 }

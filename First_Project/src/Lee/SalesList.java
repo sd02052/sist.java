@@ -12,16 +12,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.BorderFactory;
+import javax.swing.SwingConstants;
 
 public class SalesList extends JFrame {
 
 	private JFrame frame;
 	private JTable table;
+	static DefaultTableModel model;
+	static String year;
+	static String month;
+	static String date;
+	static JLabel lblNewLabel_1;
+	static JLabel lblNewLabel_4;
+	static JLabel lblNewLabel_5;
 
 	public SalesList() {
+		DecimalFormat format = new DecimalFormat("###,###");
+
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(15, 159, 78));
 		frame.setResizable(false);
@@ -34,16 +45,9 @@ public class SalesList extends JFrame {
 		scrollPane_1.setBounds(30, 66, 755, 474);
 		frame.getContentPane().add(scrollPane_1);
 
-		table = new JTable();
-		table.setBackground(new Color(0, 98, 60));
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "\uD310\uB9E4\uC561", "\uC218\uB7C9", "\uD310\uB9E4\uC561" }) {
-			Class[] columnTypes = new Class[] { Integer.class, Integer.class, Integer.class };
-
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		model = new DefaultTableModel(new String[] { "주문날짜", "주문메뉴", "수량", "금액", "결제방법" }, 0);
+		table = new JTable(model);
+		model.setRowCount(0);
 		scrollPane_1.setViewportView(table);
 
 		JButton btnNewButton_5 = new JButton("날짜 선택");
@@ -62,30 +66,31 @@ public class SalesList extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("총 매출 : ");
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel.setBounds(813, 275, 57, 15);
+		lblNewLabel.setBounds(819, 275, 51, 15);
 		frame.getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("1,000,000");
+		lblNewLabel_1 = new JLabel("0");
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(872, 275, 57, 15);
 		frame.getContentPane().add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("카드 : ");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_2.setBounds(813, 300, 57, 15);
+		lblNewLabel_2.setBounds(829, 300, 41, 15);
 		frame.getContentPane().add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("현금 : ");
-		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(813, 325, 57, 15);
-		frame.getContentPane().add(lblNewLabel_3);
-
-		JLabel lblNewLabel_4 = new JLabel("800,000");
+		lblNewLabel_4 = new JLabel("0");
 		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(872, 300, 57, 15);
 		frame.getContentPane().add(lblNewLabel_4);
 
-		JLabel lblNewLabel_5 = new JLabel("200,000");
+		JLabel lblNewLabel_3 = new JLabel("현금 : ");
+		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3.setBounds(835, 325, 35, 15);
+		frame.getContentPane().add(lblNewLabel_3);
+
+		lblNewLabel_5 = new JLabel("0");
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_5.setBounds(872, 325, 57, 15);
 		frame.getContentPane().add(lblNewLabel_5);
@@ -143,6 +148,103 @@ public class SalesList extends JFrame {
 		logoutBtn.setBounds(871, 17, 90, 30);
 		frame.getContentPane().add(logoutBtn);
 
+		JButton btnNewButton_5_1 = new JButton("전체 조회");
+		btnNewButton_5_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				orderSelect();
+				lblNewLabel_1.setText(format.format(totalPrice()));
+				lblNewLabel_4.setText(format.format(cardPrice()));
+				lblNewLabel_5.setText(format.format(moneyPrice()));
+			}
+		});
+		btnNewButton_5_1.setForeground(Color.WHITE);
+		btnNewButton_5_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnNewButton_5_1.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
+		btnNewButton_5_1.setBackground(new Color(0, 98, 60));
+		btnNewButton_5_1.setBounds(813, 137, 142, 31);
+		frame.getContentPane().add(btnNewButton_5_1);
+
 		frame.setVisible(true);
+	}
+
+	private void orderSelect() {
+		model.setRowCount(0);
+		try {
+			String sql = "select * from order1 order by order_date desc";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				String order_date = Main.db.rs.getString("order_date");
+				String menu_name = Main.db.rs.getString("menu_name");
+				int order_count = Main.db.rs.getInt("order_count");
+				int order_total = Main.db.rs.getInt("order_total");
+				String payment = Main.db.rs.getString("payment");
+				System.out.println(order_date);
+				Object[] data = { order_date, menu_name, order_count, order_total, payment };
+
+				model.addRow(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private int totalPrice() {
+		int total = 0;
+		try {
+			String sql = "select sum(order_total) from order1 ";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				total = Main.db.rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
+
+	private int cardPrice() {
+		int total = 0;
+		try {
+			String sql = "select sum(order_total) from order1 where payment ='카드'";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				total = Main.db.rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
+
+	private int moneyPrice() {
+		int total = 0;
+		try {
+			String sql = "select sum(order_total) from order1 where payment ='현금'";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				total = Main.db.rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 }

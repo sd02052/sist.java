@@ -10,8 +10,9 @@ import javax.swing.table.DefaultTableModel;
 public class MenuChange {
 
 	private JFrame frame;
-	private JTable menuTable;
 	private JButton searchBtn;
+	static JTable menuTable;
+	static DefaultTableModel model;
 
 	public MenuChange() {
 		frame = new JFrame();
@@ -80,25 +81,14 @@ public class MenuChange {
 		logoutBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 
 		// 메뉴테이블
-		JScrollPane scroll = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+		String[] header = { "메뉴", "가격" };
+		model = new DefaultTableModel(header, 0);
+		menuTable = new JTable(model);
+		JScrollPane scroll = new JScrollPane(menuTable, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setBounds(30, 66, 755, 474);
 		frame.getContentPane().add(scroll);
-
-		menuTable = new JTable();
-		menuTable
-				.setModel(
-						new DefaultTableModel(
-								new Object[][] { { "아메리카노", "4100원" }, { "스타벅스 돌체라떼", "5600원" },
-										{ "바닐라 플랫 화이트", "5600원" }, { "자몽 허니 블랙 티", "5300원" } },
-								new String[] { "\uBA54\uB274", "\uAC00\uACA9" }) {
-							Class[] columnTypes = new Class[] { String.class, Integer.class };
-
-							public Class getColumnClass(int columnIndex) {
-								return columnTypes[columnIndex];
-							}
-						});
-		scroll.setViewportView(menuTable);
+		select();
 
 		// 메뉴수정 버튼
 		JButton changeBtn = new JButton("수    정");
@@ -133,10 +123,11 @@ public class MenuChange {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				MenuChangePopup menuChange = new MenuChangePopup();
-				menuChange.setLocationRelativeTo(null);
-				menuChange.setVisible(true);
+				if (menuTable.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(null, "수정할 메뉴를 선택하세요..");
+				} else {
+					new MenuChangePopup();
+				}
 			}
 		});
 
@@ -145,7 +136,14 @@ public class MenuChange {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "삭제", JOptionPane.YES_NO_OPTION);
+				if (menuTable.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(null, "삭제할 메뉴를 선택하세요.");
+				} else {
+					int result = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "삭제", JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION) {
+						delete();
+					}
+				}
 			}
 		});
 
@@ -155,9 +153,7 @@ public class MenuChange {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				MenuAddPopup menuAdd = new MenuAddPopup();
-				menuAdd.setLocationRelativeTo(null);
-				menuAdd.setVisible(true);
+				new MenuAddPopup();
 			}
 		});
 
@@ -165,4 +161,51 @@ public class MenuChange {
 
 	}
 
+	// 테이블에 메뉴리스트 보여주는 메서드
+	public void select() {
+
+		try {
+			String sql = "select * from menu";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				String menuName = Main.db.rs.getString("menu_name");
+				int menuPrice = Main.db.rs.getInt("menu_price");
+
+				Object[] data = { menuName, menuPrice };
+
+				model.addRow(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 메뉴삭제 메서드
+	private void delete() {
+		try {
+			String sql = "delete from menu where menu_name = ?";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			int row = menuTable.getSelectedRow();
+
+			Main.db.pstmt.setString(1, (String) model.getValueAt(row, 0));
+
+			int result = Main.db.pstmt.executeUpdate();
+
+			model.removeRow(row);
+
+			if (result > 0) {
+				JOptionPane.showMessageDialog(null, "메뉴를 삭제하였습니다.");
+			} else {
+				JOptionPane.showMessageDialog(null, "메뉴 삭제를 실패하였습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

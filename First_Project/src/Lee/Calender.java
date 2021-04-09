@@ -1,29 +1,18 @@
 package Lee;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.DatagramPacket;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
-
 import javax.swing.JButton;
-
 import javax.swing.JComboBox;
-
 import javax.swing.JFrame;
-
 import javax.swing.JLabel;
-
 import javax.swing.JPanel;
 
 public class Calender extends JFrame implements ActionListener {
@@ -63,6 +52,8 @@ public class Calender extends JFrame implements ActionListener {
 	Calendar now;
 
 	int year, month, date;
+
+	DecimalFormat format = new DecimalFormat("###,###");
 
 	public Calender(int x, int y) {
 
@@ -279,19 +270,97 @@ public class Calender extends JFrame implements ActionListener {
 			}
 
 			datePane.add(jb);
-
+			// 날짜 선택하면 발생하는 이벤트
 			jb.addActionListener(new ActionListener() {
-
-				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println((int) yearCombo.getSelectedItem() + "-" + (int) monthCombo.getSelectedItem()
-							+ "-" + Integer.parseInt(jb.getText()));
+					SalesList.year = String.valueOf(yearCombo.getSelectedItem());
+					SalesList.month = String.valueOf(monthCombo.getSelectedItem());
+					SalesList.date = jb.getText();
+
+					SalesList.model.setRowCount(0);
+
+					try {
+						String date = SalesList.year + "-" + SalesList.month + "-" + SalesList.date;
+						String sql = "select * from order1 where to_char(order_date,'yyyy-fmmm-dd') like ''||?||'%'";
+						System.out.println(date);
+						Main.db.pstmt = Main.db.con.prepareStatement(sql);
+						Main.db.pstmt.setString(1, date);
+						Main.db.rs = Main.db.pstmt.executeQuery();
+
+						while (Main.db.rs.next()) {
+							String order_date = Main.db.rs.getString("order_date").substring(0, 11);
+							String menu_name = Main.db.rs.getString("menu_name");
+							int order_count = Main.db.rs.getInt("order_count");
+							int order_total = Main.db.rs.getInt("order_total");
+							String payment = Main.db.rs.getString("payment");
+							Object[] data = { order_date, menu_name, order_count, order_total, payment };
+
+							SalesList.model.addRow(data);
+						}
+						SalesList.lblNewLabel_1.setText(format.format(totalPrice(date)));
+						SalesList.lblNewLabel_4.setText(format.format(cardPrice(date)));
+						SalesList.lblNewLabel_5.setText(format.format(moneyPrice(date)));
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 					dispose();
 				}
 			});
-
 		}
+	}
 
+	private int totalPrice(String date) {
+		int total = 0;
+		try {
+			String sql = "select sum(order_total) from order1 where to_char(order_date,'yyyy-fmmm-dd') like ''||?||'%'";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.pstmt.setString(1, date);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				total = Main.db.rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
+
+	private int cardPrice(String date) {
+		int total = 0;
+		try {
+			String sql = "select sum(order_total) from order1 where payment ='카드' and to_char(order_date,'yyyy-fmmm-dd') like ''||?||'%'";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.pstmt.setString(1, date);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				total = Main.db.rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
+
+	private int moneyPrice(String date) {
+		int total = 0;
+		try {
+			String sql = "select sum(order_total) from order1 where payment ='현금' and to_char(order_date,'yyyy-fmmm-dd') like ''||?||'%'";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.pstmt.setString(1, date);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			while (Main.db.rs.next()) {
+				total = Main.db.rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 
 }

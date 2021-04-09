@@ -75,6 +75,8 @@ public class InfoChangePopup extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				update();
+				dispose();
 
 			}
 		});
@@ -90,4 +92,28 @@ public class InfoChangePopup extends JDialog {
 
 	}
 
+	// 회원정보(닉네임/패스워드) 수정 메서드
+	private void update() {
+		try {
+			String sql = "update member set mem_nick = ?, mem_pwd = ? where mem_no = ?";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			String nickname = nickText.getText();
+			String password = pwText.getText();
+
+			Main.db.pstmt.setString(1, nickname);
+			Main.db.pstmt.setString(2, password);
+			Main.db.pstmt.setInt(3, MemberLogin.member.getNo());
+
+			int result = Main.db.pstmt.executeUpdate();
+
+			if (result > 0) {
+				JOptionPane.showMessageDialog(null, "회원 정보를 수정하였습니다.");
+			} else {
+				JOptionPane.showMessageDialog(null, "회원 정보 수정에 실패하였습니다.");
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
 }

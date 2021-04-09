@@ -190,9 +190,39 @@ public class MemberHome {
 			public void actionPerformed(ActionEvent e) {
 
 				int result = JOptionPane.showConfirmDialog(null, "정말 탈퇴하시겠습니까?", "탈퇴", JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					delete();
+					frame.dispose();
+					new MemberLogin();
+					MemberLogin.member = null;
+				}
 			}
 		});
 
 		frame.setVisible(true);
+	}
+
+	// 회원탈퇴 메서드
+	private void delete() {
+
+		try {
+			String sql = "delete from member where mem_no = ?";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+
+			Main.db.pstmt.setInt(1, MemberLogin.member.getNo()); // ★
+
+			int result = Main.db.pstmt.executeUpdate();
+
+			if (result > 0) {
+				JOptionPane.showMessageDialog(null, "회원 탈퇴 되었습니다.");
+			} else {
+				JOptionPane.showMessageDialog(null, "회원 탈퇴에 실패하였습니다.");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }
