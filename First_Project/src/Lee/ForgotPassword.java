@@ -1,21 +1,18 @@
 package Lee;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import javax.swing.JPasswordField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class ForgotPassword {
 
@@ -52,12 +49,6 @@ public class ForgotPassword {
 		txtNickname = new JTextField(); // 닉네임 텍스트 필드
 		txtNickname.setForeground(Color.BLACK);
 		txtNickname.setBounds(625, 197, 225, 42);
-		txtNickname.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				txtNickname.setText("");
-			}
-
-		});
 		txtNickname.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		txtNickname.setBackground(Color.WHITE);
 		txtNickname.setHorizontalAlignment(SwingConstants.CENTER);
@@ -67,12 +58,6 @@ public class ForgotPassword {
 		txtName = new JTextField(); // 이름 텍스트 필드
 		txtName.setForeground(Color.BLACK);
 		txtName.setBounds(625, 128, 225, 42);
-		txtName.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				txtName.setText("");
-			}
-
-		});
 		txtName.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		txtName.setBackground(Color.WHITE);
 		txtName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -119,6 +104,7 @@ public class ForgotPassword {
 		JButton button = new JButton("찾기");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				findAccount();
 			}
 		});
 		button.setForeground(Color.WHITE);
@@ -130,4 +116,30 @@ public class ForgotPassword {
 		frame.setVisible(true);
 	}
 
+	// 계정 찾기 메서드
+	public void findAccount() {
+		String id = "";
+		String pwd = "";
+		try {
+			String sql = "select mem_id, mem_pwd from member where mem_name='" + txtName.getText() + "'and mem_nick = '"
+					+ txtNickname.getText() + "'";
+
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			if (Main.db.rs.next() == true) {
+
+				id = Main.db.rs.getString("mem_id");
+				pwd = Main.db.rs.getString("mem_pwd");
+
+			}
+
+			label_2.setText(id);
+			label_3.setText(pwd);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "계정을 찾을 수 없습니다.");
+			e.printStackTrace();
+		}
+
+	}
 }
