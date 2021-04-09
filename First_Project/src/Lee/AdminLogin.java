@@ -1,22 +1,22 @@
 package Lee;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class AdminLogin {
 
@@ -83,8 +83,12 @@ public class AdminLogin {
 		JButton btnNewButton_7 = new JButton("\uB85C\uADF8\uC778");
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MenuChange();
-				frame.dispose();
+				if (check() == 1) {
+					new MenuChange();
+					frame.dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "다시 입력해주세요.");
+				}
 			}
 		});
 		btnNewButton_7.setForeground(Color.WHITE);
@@ -103,5 +107,25 @@ public class AdminLogin {
 
 		frame.setVisible(true);
 
+	}
+
+	public int check() {
+
+		int state = 0;
+
+		try {
+
+			String sql = "select * from admin where admin_id = '" + txtId.getText() + "' and admin_pwd='"
+					+ passwordField.getText() + "'";
+			Main.db.pstmt = Main.db.con.prepareStatement(sql);
+			Main.db.rs = Main.db.pstmt.executeQuery();
+
+			if (Main.db.rs.next() == true) {
+				state = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return state;
 	}
 }
