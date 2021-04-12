@@ -70,4 +70,5 @@ public class AskPayment extends JFrame {
 
 		setVisible(true);
 	}
+
 }

@@ -166,7 +166,6 @@ public class MemberLogin extends JFrame {
 
 			if (Main.db.rs.next()) {
 				pass = Main.db.rs.getString("mem_pwd");
-				System.out.println(pass);
 				if (pass.equals(pwd)) {
 					state = 1;
 				} else {

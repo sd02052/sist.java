@@ -181,7 +181,6 @@ public class SalesList extends JFrame {
 				int order_count = Main.db.rs.getInt("order_count");
 				int order_total = Main.db.rs.getInt("order_total");
 				String payment = Main.db.rs.getString("payment");
-				System.out.println(order_date);
 				Object[] data = { order_date, menu_name, order_count, order_total, payment };
 
 				model.addRow(data);

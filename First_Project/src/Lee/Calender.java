@@ -282,7 +282,6 @@ public class Calender extends JFrame implements ActionListener {
 					try {
 						String date = SalesList.year + "-" + SalesList.month + "-" + SalesList.date;
 						String sql = "select * from order1 where to_char(order_date,'yyyy-fmmm-dd') like ''||?||'%'";
-						System.out.println(date);
 						Main.db.pstmt = Main.db.con.prepareStatement(sql);
 						Main.db.pstmt.setString(1, date);
 						Main.db.rs = Main.db.pstmt.executeQuery();
