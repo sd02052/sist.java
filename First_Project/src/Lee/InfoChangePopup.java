@@ -32,7 +32,7 @@ public class InfoChangePopup extends JDialog {
 		nicknameLbl.setBounds(114, 79, 67, 15);
 		Panel.add(nicknameLbl);
 
-		nickText = new JTextField();
+		nickText = new JTextField(MemberLogin.member.getNickName());
 		nickText.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		nickText.setBounds(210, 76, 118, 21);
 		Panel.add(nickText);
@@ -45,7 +45,7 @@ public class InfoChangePopup extends JDialog {
 		passwordLbl.setBounds(114, 113, 75, 15);
 		Panel.add(passwordLbl);
 
-		pwText = new JTextField();
+		pwText = new JTextField(MemberLogin.member.getPass());
 		pwText.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pwText.setBounds(210, 110, 118, 21);
 		Panel.add(pwText);

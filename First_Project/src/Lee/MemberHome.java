@@ -85,7 +85,8 @@ public class MemberHome {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 		lblNewLabel.setBackground(new Color(0, 98, 60));
-		lblNewLabel.setBounds(117, 136, 114, 28);
+		lblNewLabel.setBounds(117, 130, 114, 28);
+		lblNewLabel.setToolTipText("회원번호 : " + MemberLogin.member.getNo());
 		frame.getContentPane().add(lblNewLabel);
 
 		// 고객님! text

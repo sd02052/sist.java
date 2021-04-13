@@ -53,6 +53,7 @@ public class PayPoint extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 
 		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField.setBounds(180, 170, 130, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -96,7 +97,6 @@ public class PayPoint extends JFrame {
 		btnYes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				usePoint();
-				dispose();
 			}
 		});
 
@@ -113,6 +113,16 @@ public class PayPoint extends JFrame {
 	public void usePoint() {
 		if (Integer.parseInt(textField.getText()) > MemberLogin.member.getMileage()) {
 			JOptionPane.showMessageDialog(null, "사용할 포인트가 보유 포인트보다 많습니다.");
+			textField.setText("");
+		} else if (Integer.parseInt(textField.getText()) > Integer.parseInt(Order_win.textField.getText())) {
+			JOptionPane.showMessageDialog(null, "사용할 포인트가 결제 금액보다 많습니다.");
+			textField.setText("");
+		} else if (Integer.parseInt(textField.getText()) < 0) {
+			JOptionPane.showMessageDialog(null, "양수의 금액만 입력 가능합니다.");
+			textField.setText("");
+		} else if (Integer.parseInt(textField.getText()) % 10 != 0) {
+			JOptionPane.showMessageDialog(null, "10 단위로만 입력 가능합니다.");
+			textField.setText("");
 		} else {
 			String total = Order_win.textField.getText();
 			String point = Order_win.textField_1.getText();

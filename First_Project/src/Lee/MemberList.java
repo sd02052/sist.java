@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,6 +22,7 @@ public class MemberList extends JFrame {
 	private JFrame frame;
 	private JTable table;
 	private DefaultTableModel model;
+	DecimalFormat format = new DecimalFormat("###,###");
 
 	public MemberList() {
 		frame = new JFrame();
@@ -38,6 +40,7 @@ public class MemberList extends JFrame {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		model.setRowCount(0);
+		Order_win.createTable(table);
 		memberSelect();
 
 		JButton btnNewButton = new JButton("회원번호로 찾기");
@@ -75,18 +78,6 @@ public class MemberList extends JFrame {
 		});
 		btnNewButton_2.setBounds(813, 148, 142, 31);
 		frame.getContentPane().add(btnNewButton_2);
-
-		JButton btnNewButton_3 = new JButton("닉네임으로 찾기");
-		btnNewButton_3.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		btnNewButton_3.setForeground(new Color(255, 255, 255));
-		btnNewButton_3.setBackground(new Color(0, 98, 60));
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new FindNickname();
-			}
-		});
-		btnNewButton_3.setBounds(813, 189, 142, 31);
-		frame.getContentPane().add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("삭제");
 		btnNewButton_4.setFont(new Font("맑은 고딕", Font.BOLD, 12));
@@ -183,7 +174,7 @@ public class MemberList extends JFrame {
 				String mem_pwd = Main.db.rs.getString("mem_pwd");
 				int mem_point = Main.db.rs.getInt("mem_point");
 
-				Object[] data = { mem_no, mem_name, mem_nick, mem_id, mem_pwd, mem_point };
+				Object[] data = { mem_no, mem_name, mem_nick, mem_id, mem_pwd, format.format(mem_point) };
 
 				model.addRow(data);
 			}

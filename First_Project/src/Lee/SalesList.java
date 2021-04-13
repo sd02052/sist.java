@@ -29,9 +29,9 @@ public class SalesList extends JFrame {
 	static JLabel lblNewLabel_1;
 	static JLabel lblNewLabel_4;
 	static JLabel lblNewLabel_5;
+	DecimalFormat format = new DecimalFormat("###,###");
 
 	public SalesList() {
-		DecimalFormat format = new DecimalFormat("###,###");
 
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(15, 159, 78));
@@ -47,6 +47,7 @@ public class SalesList extends JFrame {
 
 		model = new DefaultTableModel(new String[] { "주문날짜", "주문메뉴", "수량", "금액", "결제방법" }, 0);
 		table = new JTable(model);
+		Order_win.createTable(table);
 		model.setRowCount(0);
 		scrollPane_1.setViewportView(table);
 
@@ -181,7 +182,7 @@ public class SalesList extends JFrame {
 				int order_count = Main.db.rs.getInt("order_count");
 				int order_total = Main.db.rs.getInt("order_total");
 				String payment = Main.db.rs.getString("payment");
-				Object[] data = { order_date, menu_name, order_count, order_total, payment };
+				Object[] data = { order_date, menu_name, order_count, format.format(order_total), payment };
 
 				model.addRow(data);
 			}

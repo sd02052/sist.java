@@ -270,6 +270,7 @@ public class Calender extends JFrame implements ActionListener {
 			}
 
 			datePane.add(jb);
+
 			// 날짜 선택하면 발생하는 이벤트
 			jb.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -292,7 +293,7 @@ public class Calender extends JFrame implements ActionListener {
 							int order_count = Main.db.rs.getInt("order_count");
 							int order_total = Main.db.rs.getInt("order_total");
 							String payment = Main.db.rs.getString("payment");
-							Object[] data = { order_date, menu_name, order_count, order_total, payment };
+							Object[] data = { order_date, menu_name, order_count, format.format(order_total), payment };
 
 							SalesList.model.addRow(data);
 						}

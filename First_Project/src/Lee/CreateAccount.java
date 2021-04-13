@@ -33,7 +33,6 @@ public class CreateAccount {
 	private JPasswordField passwordField_1;
 	private JPanel panel;
 
-	
 	public CreateAccount() {
 		frame = new JFrame(); // 프레임 설정
 		frame.setBounds(100, 100, 1000, 600);

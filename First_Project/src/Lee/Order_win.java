@@ -224,6 +224,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
 public class Order_win extends JFrame {
@@ -239,10 +240,7 @@ public class Order_win extends JFrame {
 	private Font font1 = new Font("맑은 고딕", Font.BOLD, 16);
 	static JTable table;
 	static DefaultTableModel model;
-
-	String name;
-	int price;
-	int count;
+	DecimalFormat format = new DecimalFormat("###,###");
 
 	ImageIcon icon1 = new ImageIcon("Image/아메리카노.jpg"); // 사진 경로 설정
 	ImageIcon icon2 = new ImageIcon("Image/카페라떼.jpg");
@@ -342,6 +340,63 @@ public class Order_win extends JFrame {
 		btnNewButton_4_1.setBounds(770, 238, 150, 150);
 		contentPane.add(btnNewButton_4_1);
 
+		// 메뉴 이름 라벨
+		JLabel menulb1 = new JLabel("아메리카노");
+		menulb1.setForeground(Color.WHITE);
+		menulb1.setBounds(80, 210, 150, 30);
+		menulb1.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb1.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb1);
+
+		JLabel menulb2 = new JLabel("바닐라크림 콜드브루");
+		menulb2.setForeground(Color.WHITE);
+		menulb2.setBounds(310, 210, 150, 30);
+		menulb2.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb2.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb2);
+
+		JLabel menulb3 = new JLabel("스타벅스 돌체라떼");
+		menulb3.setForeground(Color.WHITE);
+		menulb3.setBounds(540, 210, 150, 30);
+		menulb3.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb3.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb3);
+
+		JLabel menulb4 = new JLabel("카페라떼");
+		menulb4.setForeground(Color.WHITE);
+		menulb4.setBounds(770, 210, 150, 30);
+		menulb4.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb4.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb4);
+
+		JLabel menulb5 = new JLabel("바닐라 플랫 화이트");
+		menulb5.setForeground(Color.WHITE);
+		menulb5.setBounds(80, 388, 150, 30);
+		menulb5.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb5.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb5);
+
+		JLabel menulb6 = new JLabel("자몽 허니 블랙티");
+		menulb6.setForeground(Color.WHITE);
+		menulb6.setBounds(310, 388, 150, 30);
+		menulb6.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb6.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb6);
+
+		JLabel menulb7 = new JLabel("핑크 자몽 피지오");
+		menulb7.setForeground(Color.WHITE);
+		menulb7.setBounds(540, 388, 150, 30);
+		menulb7.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb7.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		contentPane.add(menulb7);
+
+		JLabel menulb8 = new JLabel("더블 에스프레소 칩 프라푸치노");
+		menulb8.setForeground(Color.WHITE);
+		menulb8.setBounds(770, 388, 150, 30);
+		menulb8.setHorizontalAlignment(SwingConstants.CENTER);
+		menulb8.setFont(new Font("맑은 고딕", Font.BOLD, 10));
+		contentPane.add(menulb8);
+
 		// 홈과 로그아웃 버튼
 
 		JButton home_button = new JButton("홈");
@@ -439,7 +494,7 @@ public class Order_win extends JFrame {
 		textField_1.setBounds(587, 490, 137, 39);
 		contentPane.add(textField_1);
 
-		// 현금 결제 버튼
+		// 포인트 사용 버튼
 		JButton usePoint = new JButton("포인트 사용");
 		usePoint.setBounds(779, 430, 159, 50);
 		usePoint.setBackground(buttonColor);
@@ -447,7 +502,7 @@ public class Order_win extends JFrame {
 		usePoint.setFont(font1);
 		contentPane.add(usePoint);
 
-		// 카드 결제 버튼
+		// 결제 버튼
 		JButton payment = new JButton("결제 하기");
 		payment.setBounds(779, 490, 159, 50);
 		payment.setBackground(buttonColor);
@@ -477,7 +532,11 @@ public class Order_win extends JFrame {
 		// 결제하기 버튼 이벤트
 		payment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AskPayment();
+				if (table.getRowCount() == 0) {
+					JOptionPane.showMessageDialog(null, "장바구니가 비어있습니다.");
+				} else {
+					new AskPayment();
+				}
 			}
 		});
 
