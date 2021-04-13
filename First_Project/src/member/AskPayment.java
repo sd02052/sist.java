@@ -1,4 +1,4 @@
-package Lee;
+package member;
 
 import java.awt.Color;
 import java.awt.Font;

@@ -190,7 +190,7 @@
 //	}
 //}
 
-package Lee;
+package member;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -209,7 +209,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import DTO.OrderDTO;
+import app.Main;
+import dto.OrderDTO;
 
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
@@ -521,7 +522,9 @@ public class Order_win extends JFrame {
 		// 포인트 사용 버튼 이벤트
 		usePoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (MemberLogin.member.getMileage() > 0) {
+				if (table.getRowCount() == 0) {
+					JOptionPane.showMessageDialog(null, "장바구니가 비어있습니다.");
+				} else if (MemberLogin.member.getMileage() > 0) {
 					new PayPoint();
 				} else {
 					JOptionPane.showMessageDialog(null, "사용할 포인트가 없습니다.");

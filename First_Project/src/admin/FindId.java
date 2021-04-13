@@ -1,57 +1,55 @@
-package Lee;
+package admin;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
 
-public class FindName extends JFrame {
+import app.Main;
+
+public class FindId extends JFrame {
 
 	private JFrame frame;
 	private JTextField tfEnter;
-	static JTable table;
-	static DefaultTableModel model;
-	static DecimalFormat format = new DecimalFormat("###,###");
+	private JLabel lbNo1;
+	private JLabel lbName1;
+	private JLabel lbNick1;
+	private JLabel lbId1;
+	private JLabel lbPass1;
+	private JLabel lbPoint1;
 
-	public FindName() {
+	public FindId() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 300);
+		frame.setBounds(100, 100, 300, 200);
 		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 484, 25);
-		frame.getContentPane().add(panel);
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setBackground(new Color(12, 159, 78));
-		JLabel lbTitle = new JLabel("이름을 입력하세요.");
+		JLabel lbTitle = new JLabel("아이디를 입력하세요.");
 		panel.add(lbTitle);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 25, 484, 36);
 		panel_1.setBackground(new Color(12, 159, 78));
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 
 		tfEnter = new JTextField();
-		tfEnter.setBounds(148, 6, 116, 21);
 		panel_1.add(tfEnter);
 		tfEnter.setColumns(10);
 
 		JButton btnFind = new JButton("찾기");
-		btnFind.setBounds(269, 5, 31, 23);
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				memberFind(tfEnter.getText());
@@ -65,7 +63,6 @@ public class FindName extends JFrame {
 		btnFind.setBackground(new Color(0, 98, 60));
 
 		JButton btnClose = new JButton("닫기");
-		btnClose.setBounds(305, 5, 31, 23);
 		btnClose.setForeground(Color.WHITE);
 		btnClose.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		btnClose.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
@@ -78,26 +75,63 @@ public class FindName extends JFrame {
 		panel_1.add(btnClose);
 
 		JPanel panel_2 = new JPanel();
+		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		panel_2.setBackground(new Color(12, 159, 78));
-		panel_2.setBounds(0, 60, 484, 201);
-		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(null);
+		panel_2.setLayout(new GridLayout(7, 2, 0, 0));
 
-		String[] header = { "회원번호", "이름", "닉네임", "아이디", "비밀번호", "포인트" };
-		model = new DefaultTableModel(header, 0);
-		table = new JTable(model);
-		JScrollPane scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.setBounds(12, 10, 460, 181);
-		panel_2.add(scroll);
-		Order_win.createTable(table);
+		JLabel lbNo = new JLabel("회원번호 : ");
+		lbNo.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lbNo);
+
+		lbNo1 = new JLabel("");
+		lbNo1.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_2.add(lbNo1);
+
+		JLabel lbName = new JLabel("이름  : ");
+		lbName.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lbName);
+
+		lbName1 = new JLabel("");
+		lbName1.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_2.add(lbName1);
+
+		JLabel lbNick = new JLabel("닉네임 : ");
+		lbNick.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lbNick);
+
+		lbNick1 = new JLabel("");
+		lbNick1.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_2.add(lbNick1);
+
+		JLabel lbId = new JLabel("아이디 : ");
+		lbId.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lbId);
+
+		lbId1 = new JLabel("");
+		lbId1.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_2.add(lbId1);
+
+		JLabel lbPass = new JLabel("비밀번호 : ");
+		lbPass.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lbPass);
+
+		lbPass1 = new JLabel("");
+		lbPass1.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_2.add(lbPass1);
+
+		JLabel lbPoint = new JLabel("포인트 : ");
+		lbPoint.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lbPoint);
+
+		lbPoint1 = new JLabel("");
+		panel_2.add(lbPoint1);
 
 		frame.setVisible(true);
 	}
 
 	private void memberFind(String id) {
 		try {
-			String sql = "select * from member where mem_name = ?";
+			String sql = "select * from member where mem_id = ?";
 			Main.db.pstmt = Main.db.con.prepareStatement(sql);
 			Main.db.pstmt.setString(1, id);
 			Main.db.rs = Main.db.pstmt.executeQuery();
@@ -110,10 +144,12 @@ public class FindName extends JFrame {
 				String mem_pwd = Main.db.rs.getString("mem_pwd");
 				int mem_point = Main.db.rs.getInt("mem_point");
 
-				Object[] data = { mem_no, mem_name, mem_nick, mem_id, mem_pwd, format.format(mem_point) };
-
-				model.addRow(data);
-
+				lbNo1.setText(mem_no + "");
+				lbName1.setText(mem_name);
+				lbNick1.setText(mem_nick);
+				lbId1.setText(mem_id);
+				lbPass1.setText(mem_pwd);
+				lbPoint1.setText(mem_point + "");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

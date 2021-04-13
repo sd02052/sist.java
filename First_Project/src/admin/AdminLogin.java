@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import app.Main;
+import member.MemberLogin;
 
 public class AdminLogin {
 
@@ -38,7 +41,13 @@ public class AdminLogin {
 		frame.getContentPane().setBackground(c); // 배경색 지정
 
 		passwordField = new JPasswordField(); // 비밀번호 패스워드 필드
-		passwordField.setToolTipText("");
+		passwordField.setText("비밀번호");
+		passwordField.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				passwordField.setText("");
+			}
+
+		});
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordField.setBounds(625, 202, 225, 42);
 		frame.getContentPane().add(passwordField);

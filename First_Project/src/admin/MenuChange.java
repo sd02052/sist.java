@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,6 +17,9 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import app.Main;
+import member.Order_win;
 
 public class MenuChange {
 

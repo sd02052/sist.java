@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import app.Main;
 
 public class Calender extends JFrame implements ActionListener {
 

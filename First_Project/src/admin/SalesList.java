@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.EventQueue;
 
@@ -11,6 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import app.Main;
+import member.Order_win;
+
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;

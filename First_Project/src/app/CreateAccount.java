@@ -1,4 +1,4 @@
-package Lee;
+package app;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import member.MemberLogin;
+
 import java.awt.ComponentOrientation;
 import javax.swing.JPasswordField;
 
@@ -45,12 +48,6 @@ public class CreateAccount {
 
 		txtId = new JTextField(); // ID 텍스트 필드
 		txtId.setForeground(Color.BLACK);
-		txtId.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				txtId.setText("");
-			}
-
-		});
 		txtId.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		txtId.setBackground(Color.WHITE);
 		txtId.setBounds(681, 128, 225, 42);
@@ -60,12 +57,6 @@ public class CreateAccount {
 
 		txtName = new JTextField(); // 이름 텍스트 필드
 		txtName.setForeground(Color.BLACK);
-		txtName.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				txtName.setText("");
-			}
-
-		});
 		txtName.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		txtName.setBackground(Color.WHITE);
 		txtName.setBounds(681, 290, 225, 42);
@@ -75,12 +66,6 @@ public class CreateAccount {
 
 		txtNickname = new JTextField(); // 닉네임 텍스트 필드
 		txtNickname.setForeground(Color.BLACK);
-		txtNickname.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				txtNickname.setText("");
-			}
-
-		});
 		txtNickname.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		txtNickname.setBackground(Color.WHITE);
 		txtNickname.setBounds(681, 344, 225, 42);

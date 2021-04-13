@@ -1,4 +1,4 @@
-package Lee;
+package app;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import member.MemberLogin;
 
 public class ForgotPassword {
 

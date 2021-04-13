@@ -1,4 +1,6 @@
-package Lee;
+package app;
+
+import member.MemberLogin;
 
 public class Main {
 	static public DBConnection db = new DBConnection();

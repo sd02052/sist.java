@@ -1,6 +1,6 @@
-package DTO;
+package dto;
 
-import Lee.Main;
+import app.Main;
 
 public class MemberDAO {
 

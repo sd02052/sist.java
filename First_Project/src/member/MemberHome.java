@@ -1,4 +1,4 @@
-package Lee;
+package member;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,8 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 
-import DTO.MemberDAO;
+import app.Main;
+import dto.MemberDAO;
 
 public class MemberHome {
 
@@ -86,7 +87,6 @@ public class MemberHome {
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 		lblNewLabel.setBackground(new Color(0, 98, 60));
 		lblNewLabel.setBounds(117, 130, 114, 28);
-		lblNewLabel.setToolTipText("회원번호 : " + MemberLogin.member.getNo());
 		frame.getContentPane().add(lblNewLabel);
 
 		// 고객님! text
@@ -121,7 +121,7 @@ public class MemberHome {
 		frame.getContentPane().add(imageLbl);
 
 		// 정보수정 버튼
-		JButton infoChangeBtn = new JButton("정보수정");
+		JButton infoChangeBtn = new JButton("정보조회/수정");
 		infoChangeBtn.setForeground(new Color(255, 255, 255));
 		infoChangeBtn.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		infoChangeBtn.setBounds(121, 289, 223, 38);

@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.EventQueue;
 
@@ -8,6 +8,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import app.Main;
+import member.Order_win;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;

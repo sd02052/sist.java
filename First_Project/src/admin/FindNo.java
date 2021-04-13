@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import app.Main;
 
 public class FindNo extends JFrame {
 

@@ -1,4 +1,4 @@
-package Lee;
+package admin;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import app.Main;
 
 public class MenuChangePopup extends JDialog {
 

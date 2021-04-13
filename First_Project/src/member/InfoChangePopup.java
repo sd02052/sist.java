@@ -1,4 +1,4 @@
-package Lee;
+package member;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import app.Main;
 
 public class InfoChangePopup extends JDialog {
 
@@ -27,22 +29,24 @@ public class InfoChangePopup extends JDialog {
 		// 컴포넌트
 		// 닉네임 레이블 /텍스트필드
 		JLabel nicknameLbl = new JLabel("닉네임 : ");
+		nicknameLbl.setHorizontalAlignment(SwingConstants.RIGHT);
 		nicknameLbl.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		nicknameLbl.setForeground(Color.WHITE);
-		nicknameLbl.setBounds(114, 79, 67, 15);
+		nicknameLbl.setBounds(114, 60, 67, 15);
 		Panel.add(nicknameLbl);
 
 		nickText = new JTextField(MemberLogin.member.getNickName());
 		nickText.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		nickText.setBounds(210, 76, 118, 21);
+		nickText.setBounds(210, 57, 118, 21);
 		Panel.add(nickText);
 		nickText.setColumns(10);
 
 		// 비밀번호 레이블/텍스트필드
 		JLabel passwordLbl = new JLabel("비밀번호 : ");
+		passwordLbl.setHorizontalAlignment(SwingConstants.RIGHT);
 		passwordLbl.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		passwordLbl.setForeground(Color.WHITE);
-		passwordLbl.setBounds(114, 113, 75, 15);
+		passwordLbl.setBounds(114, 113, 67, 15);
 		Panel.add(passwordLbl);
 
 		pwText = new JTextField(MemberLogin.member.getPass());
@@ -68,6 +72,50 @@ public class InfoChangePopup extends JDialog {
 		cancelBtn.setBackground(new Color(0, 98, 60));
 		cancelBtn.setBorder(BorderFactory.createLineBorder(Color.decode("#00623C")));
 		Panel.add(cancelBtn);
+
+		JLabel nicknameLbl_1 = new JLabel("회원번호 : ");
+		nicknameLbl_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		nicknameLbl_1.setForeground(Color.WHITE);
+		nicknameLbl_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		nicknameLbl_1.setBounds(114, 10, 67, 15);
+		Panel.add(nicknameLbl_1);
+
+		JLabel lblNewLabel = new JLabel(MemberLogin.member.getNo() + "");
+		lblNewLabel.setBounds(210, 11, 97, 15);
+		Panel.add(lblNewLabel);
+
+		JLabel nicknameLbl_1_1 = new JLabel("이름 : ");
+		nicknameLbl_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		nicknameLbl_1_1.setForeground(Color.WHITE);
+		nicknameLbl_1_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		nicknameLbl_1_1.setBounds(114, 35, 67, 15);
+		Panel.add(nicknameLbl_1_1);
+
+		JLabel lblNewLabel_1 = new JLabel(MemberLogin.member.getName());
+		lblNewLabel_1.setBounds(210, 36, 97, 15);
+		Panel.add(lblNewLabel_1);
+
+		JLabel nicknameLbl_2 = new JLabel("아이디 : ");
+		nicknameLbl_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		nicknameLbl_2.setForeground(Color.WHITE);
+		nicknameLbl_2.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		nicknameLbl_2.setBounds(114, 85, 67, 15);
+		Panel.add(nicknameLbl_2);
+
+		JLabel lblNewLabel_1_1 = new JLabel(MemberLogin.member.getId());
+		lblNewLabel_1_1.setBounds(210, 88, 97, 15);
+		Panel.add(lblNewLabel_1_1);
+
+		JLabel nicknameLbl_2_1 = new JLabel("포인트 : ");
+		nicknameLbl_2_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		nicknameLbl_2_1.setForeground(Color.WHITE);
+		nicknameLbl_2_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		nicknameLbl_2_1.setBounds(114, 138, 67, 15);
+		Panel.add(nicknameLbl_2_1);
+
+		JLabel lblNewLabel_1_1_1 = new JLabel(MemberLogin.member.getMileage() + "");
+		lblNewLabel_1_1_1.setBounds(210, 141, 97, 15);
+		Panel.add(lblNewLabel_1_1_1);
 
 		// 이벤트
 		// 확인 버튼 이벤트
@@ -106,6 +154,8 @@ public class InfoChangePopup extends JDialog {
 			Main.db.pstmt.setInt(3, MemberLogin.member.getNo());
 
 			int result = Main.db.pstmt.executeUpdate();
+			MemberLogin.member.setNickName(nickname);
+			MemberLogin.member.setPass(password);
 
 			if (result > 0) {
 				JOptionPane.showMessageDialog(null, "회원 정보를 수정하였습니다.");

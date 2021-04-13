@@ -1,33 +1,39 @@
-package Lee;
+package member;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import app.Main;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
-public class PayCard extends JFrame {
+public class PayMoney extends JFrame {
 
 	private JPanel contentPane;
 	private Color backColor = new Color(15, 159, 78);
 	private Color buttonColor = new Color(0, 98, 60);
 	private Color fontColor = new Color(255, 255, 255);
-	private Font font = new Font("맑은 고딕", Font.BOLD, 20);
 	Font font1 = new Font("맑은 고딕", Font.BOLD, 16);
 
-	public PayCard() {
+	public PayMoney() {
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(backColor);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(backColor);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("현금 결제가 완료되었습니다.");
+		lblNewLabel.setFont(font1);
+		lblNewLabel.setBounds(144, 138, 222, 16);
+		lblNewLabel.setForeground(fontColor);
+		contentPane.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("결제 금액 : ");
 		lblNewLabel_1.setForeground(Color.WHITE);
@@ -48,12 +54,6 @@ public class PayCard extends JFrame {
 		lblNewLabel_3.setBounds(353, 102, 28, 15);
 		contentPane.add(lblNewLabel_3);
 
-		JLabel lblNewLabel = new JLabel("카드 결제가 완료되었습니다.");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		lblNewLabel.setBounds(144, 138, 222, 16);
-		contentPane.add(lblNewLabel);
-
 		JButton btnNewButton = new JButton("확인");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -61,33 +61,34 @@ public class PayCard extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnNewButton.setBackground(new Color(0, 98, 60));
+		btnNewButton.setBackground(buttonColor);
+		btnNewButton.setForeground(fontColor);
+		btnNewButton.setFont(font1);
 		btnNewButton.setBounds(183, 208, 117, 29);
 		contentPane.add(btnNewButton);
 
 		setVisible(true);
+
 	}
 
 	public void insertOrder() {
 		int point = 0;
 		try {
-			String sql = "insert into order1 values(sysdate, ?, ?, ?, '카드')";
-//			String sql2 = "update order1 set order_count = ?, order_total = ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '카드'";
-			String sql3 = "select * from order1 where to_char(order_date, 'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '카드'";
+			String sql = "insert into order1 values(sysdate, ?, ?, ?, '현금')";
+//			String sql2 = "update order1 set order_count = ?, order_total = ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
+			String sql3 = "select * from order1 where to_char(order_date, 'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
 			String sql4 = "update member set mem_point = ? where mem_no = ?";
 			String sql5 = "update member set mem_point = mem_point + ? where mem_no = ?";
 			String sql6 = "select mem_point from member where mem_no = ?";
-			String sql7 = "update order1 set order_count = order_count + ?, order_total = order_total + ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '카드'";
+			String sql7 = "update order1 set order_count = order_count + ?, order_total = order_total + ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
 
-			for (int i = 0; i < Order_win.model.getRowCount(); i++) { // 주문 테이블 순회
+			for (int i = 0; i < Order_win.model.getRowCount(); i++) {
 				String menu_name = String.valueOf(Order_win.table.getValueAt(i, 0));
 				int order_count = (int) Order_win.table.getValueAt(i, 1);
 				int order_total = (int) Order_win.table.getValueAt(i, 2);
 
 				String date = date();
-				if (findOrder(date, menu_name)) { // 같은 날, 같은 결제방법으로 결제한 메뉴가 있는 경우
+				if (findOrder(date, menu_name)) {
 					Main.db.pstmt = Main.db.con.prepareStatement(sql7);
 					Main.db.pstmt.setInt(1, order_count);
 					Main.db.pstmt.setInt(2, order_total);
@@ -96,7 +97,7 @@ public class PayCard extends JFrame {
 
 					Main.db.pstmt.executeUpdate();
 
-				} else { // 없는 경우
+				} else {
 					Main.db.pstmt = Main.db.con.prepareStatement(sql);
 					Main.db.pstmt.setString(1, menu_name);
 					Main.db.pstmt.setInt(2, order_count);
@@ -126,13 +127,12 @@ public class PayCard extends JFrame {
 				point = Main.db.rs.getInt(1);
 			}
 
-			// member 객체 포인트 변경
+			// member객체 포인트 변경
 			MemberLogin.member.setMileage(point);
 
 			Order_win.model.setRowCount(0);
 			Order_win.textField.setText("0");
 			Order_win.textField_1.setText(String.valueOf(MemberLogin.member.getMileage()));
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class PayCard extends JFrame {
 	public boolean findOrder(String date, String name) {
 		boolean state = false;
 		try {
-			String sql = "select * from order1 where to_char(order_date, 'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '카드'";
+			String sql = "select * from order1 where to_char(order_date, 'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
 			Main.db.pstmt = Main.db.con.prepareStatement(sql);
 			Main.db.pstmt.setString(1, date);
 			Main.db.pstmt.setString(2, name);
