@@ -8,13 +8,6 @@ public class OrderDTO {
 	private int order_total;
 	private String payment;
 
-	public OrderDTO(String order_date, String menu_name, int order_count, int order_total, String payment) {
-		this.order_date = order_date;
-		this.menu_name = menu_name;
-		this.order_total = order_total;
-		this.payment = payment;
-	}
-
 	public String getOrder_date() {
 		return order_date;
 	}

@@ -1,4 +1,4 @@
-package app;
+package member;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import member.MemberLogin;
+import app.Main;
 
 import java.awt.ComponentOrientation;
 import javax.swing.JPasswordField;

@@ -1,4 +1,4 @@
-package app;
+package member;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import member.MemberLogin;
+import app.Main;
 
 public class ForgotPassword {
 

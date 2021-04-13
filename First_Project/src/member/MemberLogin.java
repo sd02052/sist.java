@@ -20,8 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import admin.AdminLogin;
-import app.CreateAccount;
-import app.ForgotPassword;
 import app.Main;
 import dto.MemberDTO;
 
