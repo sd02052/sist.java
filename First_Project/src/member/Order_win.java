@@ -245,10 +245,10 @@ public class Order_win extends JFrame {
 
 	ImageIcon icon1 = new ImageIcon("Image/아메리카노.jpg"); // 사진 경로 설정
 	ImageIcon icon2 = new ImageIcon("Image/카페라떼.jpg");
-	ImageIcon icon3 = new ImageIcon("Image/돌체라떼.jpg");
+	ImageIcon icon3 = new ImageIcon("Image/스타벅스 돌체라떼.jpg");
 	ImageIcon icon4 = new ImageIcon("Image/바닐라 크림 콜드브루.jpg");
 	ImageIcon icon5 = new ImageIcon("Image/바닐라 플랫 화이트.jpg");
-	ImageIcon icon6 = new ImageIcon("Image/자몽 허니 블랙티.jpg");
+	ImageIcon icon6 = new ImageIcon("Image/자몽 허니 블랙 티.jpg");
 	ImageIcon icon7 = new ImageIcon("Image/핑크 자몽 피지오.png");
 	ImageIcon icon8 = new ImageIcon("Image/더블 에스프레소 칩 프라푸치노.png");
 
@@ -286,7 +286,7 @@ public class Order_win extends JFrame {
 		btnNewButton_2.setBounds(770, 60, 150, 150);
 		contentPane.add(btnNewButton_2);
 
-		JButton btnNewButton_3 = new JButton("돌체라떼", icon3);
+		JButton btnNewButton_3 = new JButton("스타벅스 돌체라떼", icon3);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addMenu(btnNewButton_3);
@@ -314,7 +314,7 @@ public class Order_win extends JFrame {
 		btnNewButton_1_1.setBounds(80, 238, 150, 150);
 		contentPane.add(btnNewButton_1_1);
 
-		JButton btnNewButton_2_1 = new JButton("자몽 허니 블랙티", icon6);
+		JButton btnNewButton_2_1 = new JButton("자몽 허니 블랙 티", icon6);
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addMenu(btnNewButton_2_1);
@@ -377,7 +377,7 @@ public class Order_win extends JFrame {
 		menulb5.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		contentPane.add(menulb5);
 
-		JLabel menulb6 = new JLabel("자몽 허니 블랙티");
+		JLabel menulb6 = new JLabel("자몽 허니 블랙 티");
 		menulb6.setForeground(Color.WHITE);
 		menulb6.setBounds(310, 388, 150, 30);
 		menulb6.setHorizontalAlignment(SwingConstants.CENTER);
