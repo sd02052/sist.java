@@ -1,11 +1,21 @@
 package Lee;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class MenuChange {
 
@@ -88,7 +98,9 @@ public class MenuChange {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setBounds(30, 66, 755, 474);
 		frame.getContentPane().add(scroll);
+		Order_win.createTable(menuTable);
 		select();
+
 
 		// 메뉴수정 버튼
 		JButton changeBtn = new JButton("수    정");

@@ -205,7 +205,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import DTO.OrderDTO;
 
@@ -360,6 +362,7 @@ public class Order_win extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
+					MemberLogin.member = null;
 					new MemberLogin();
 					dispose();
 				}
@@ -378,6 +381,7 @@ public class Order_win extends JFrame {
 		model = new DefaultTableModel(new String[] { "상품명", "수량", "금액" }, 0);
 		table = new JTable(model);
 		scrollpane.setViewportView(table);
+		createTable(table);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane.add(scrollpane, BorderLayout.CENTER);
@@ -477,16 +481,6 @@ public class Order_win extends JFrame {
 			}
 		});
 
-		// 취소하기 버튼 이벤트
-		/*
-		 * orderDelete.addActionListener(new ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent e) {
-		 * btnNewButton_1.addActionListener();
-		 * 
-		 * } });
-		 */
-
 		setVisible(true);
 	}
 
@@ -524,6 +518,7 @@ public class Order_win extends JFrame {
 		}
 	}
 
+	// +
 	public void plus() {
 		try {
 			String menu_name = "";
@@ -556,6 +551,7 @@ public class Order_win extends JFrame {
 		}
 	}
 
+	// -
 	public void minus() {
 		try {
 			String menu_name = "";
@@ -591,6 +587,7 @@ public class Order_win extends JFrame {
 		}
 	}
 
+	// 주문금액, 마일리지 출력
 	public void total() {
 		int total = 0;
 
@@ -600,5 +597,17 @@ public class Order_win extends JFrame {
 
 		textField.setText(String.valueOf(total));
 		textField_1.setText(String.valueOf(MemberLogin.member.getMileage()));
+	}
+
+	public static void createTable(JTable table) {
+		DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+
+		tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+		TableColumnModel tcmSchedule = table.getColumnModel();
+
+		for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+			tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+		}
 	}
 }

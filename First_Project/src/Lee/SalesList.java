@@ -176,7 +176,7 @@ public class SalesList extends JFrame {
 			Main.db.rs = Main.db.pstmt.executeQuery();
 
 			while (Main.db.rs.next()) {
-				String order_date = Main.db.rs.getString("order_date");
+				String order_date = Main.db.rs.getString("order_date").substring(0, 10);
 				String menu_name = Main.db.rs.getString("menu_name");
 				int order_count = Main.db.rs.getInt("order_count");
 				int order_total = Main.db.rs.getInt("order_total");

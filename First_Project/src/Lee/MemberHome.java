@@ -26,15 +26,15 @@ public class MemberHome {
 		ImageIcon Path = null;
 
 		if (Value == 1) {
-			Path = new ImageIcon("Image\\banner1.png");
+			Path = new ImageIcon("Image/banner1.png");
 		} else if (Value == 2) {
-			Path = new ImageIcon("Image\\banner2.png");
+			Path = new ImageIcon("Image/banner2.png");
 		} else if (Value == 3) {
-			Path = new ImageIcon("Image\\banner3.png");
+			Path = new ImageIcon("Image/banner3.png");
 		} else if (Value == 4) {
-			Path = new ImageIcon("Image\\banner4.jpg");
+			Path = new ImageIcon("Image/banner4.jpg");
 		} else if (Value == 5) {
-			Path = new ImageIcon("Image\\banner5.jpg");
+			Path = new ImageIcon("Image/banner5.jpg");
 		}
 
 		Image img1 = Path.getImage();
@@ -144,6 +144,7 @@ public class MemberHome {
 
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
+					MemberLogin.member = null;
 					new MemberLogin();
 					frame.dispose();
 				}
@@ -210,7 +211,7 @@ public class MemberHome {
 
 			Main.db.pstmt = Main.db.con.prepareStatement(sql);
 
-			Main.db.pstmt.setInt(1, MemberLogin.member.getNo()); // ★
+			Main.db.pstmt.setInt(1, MemberLogin.member.getNo());
 
 			int result = Main.db.pstmt.executeUpdate();
 

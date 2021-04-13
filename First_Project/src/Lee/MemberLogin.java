@@ -95,16 +95,6 @@ public class MemberLogin extends JFrame {
 		JButton btnNewButton_7 = new JButton("\uB85C\uADF8\uC778"); // 로그인 버튼
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				int res = login(txtId.getText(), passwordField_1.getText());
-//				if (res == 1) {
-//					new MemberHome();
-//					frame.dispose();
-//				} else if (res == 0) {
-//					JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
-//				} else if (res == -1) {
-//					JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다.");
-//				}
-
 				int res = login(txtId.getText(), passwordField_1.getText());
 				if (res == 1) {
 					mb(txtId.getText());
@@ -124,7 +114,13 @@ public class MemberLogin extends JFrame {
 		frame.getContentPane().add(btnNewButton_7);
 
 		passwordField_1 = new JPasswordField(); // 비밀번호 필드
-		passwordField_1.setToolTipText("");
+		passwordField_1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				passwordField_1.setText("");
+			}
+		});
+
+		passwordField_1.setText("비밀번호");
 		passwordField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordField_1.setBounds(625, 193, 225, 42);
 		frame.getContentPane().add(passwordField_1);
@@ -196,4 +192,5 @@ public class MemberLogin extends JFrame {
 		}
 
 	}
+
 }
