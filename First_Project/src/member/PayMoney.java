@@ -75,12 +75,10 @@ public class PayMoney extends JFrame {
 		int point = 0;
 		try {
 			String sql = "insert into order1 values(sysdate, ?, ?, ?, '현금')";
-//			String sql2 = "update order1 set order_count = ?, order_total = ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
-			String sql3 = "select * from order1 where to_char(order_date, 'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
-			String sql4 = "update member set mem_point = ? where mem_no = ?";
-			String sql5 = "update member set mem_point = mem_point + ? where mem_no = ?";
-			String sql6 = "select mem_point from member where mem_no = ?";
-			String sql7 = "update order1 set order_count = order_count + ?, order_total = order_total + ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
+			String sql2 = "update member set mem_point = ? where mem_no = ?";
+			String sql3 = "update member set mem_point = mem_point + ? where mem_no = ?";
+			String sql4 = "select mem_point from member where mem_no = ?";
+			String sql5 = "update order1 set order_count = order_count + ?, order_total = order_total + ? where to_char(order_date,'yyyy-mm-dd') like ''||?||'%' and menu_name = ? and payment = '현금'";
 
 			for (int i = 0; i < Order_win.model.getRowCount(); i++) {
 				String menu_name = String.valueOf(Order_win.table.getValueAt(i, 0));
@@ -89,7 +87,7 @@ public class PayMoney extends JFrame {
 
 				String date = date();
 				if (findOrder(date, menu_name)) {
-					Main.db.pstmt = Main.db.con.prepareStatement(sql7);
+					Main.db.pstmt = Main.db.con.prepareStatement(sql5);
 					Main.db.pstmt.setInt(1, order_count);
 					Main.db.pstmt.setInt(2, order_total);
 					Main.db.pstmt.setString(3, date);
@@ -108,19 +106,19 @@ public class PayMoney extends JFrame {
 			}
 
 			// db 포인트 변경
-			Main.db.pstmt = Main.db.con.prepareStatement(sql4);
+			Main.db.pstmt = Main.db.con.prepareStatement(sql2);
 			Main.db.pstmt.setInt(1, Integer.parseInt(Order_win.textField_1.getText()));
 			Main.db.pstmt.setInt(2, MemberLogin.member.getNo());
 			Main.db.pstmt.executeQuery();
 
 			// db 포인트 추가
-			Main.db.pstmt = Main.db.con.prepareStatement(sql5);
+			Main.db.pstmt = Main.db.con.prepareStatement(sql3);
 			Main.db.pstmt.setInt(1, (int) ((Integer.parseInt(Order_win.textField.getText())) * 0.1));
 			Main.db.pstmt.setInt(2, MemberLogin.member.getNo());
 			Main.db.pstmt.executeQuery();
 
 			// db 수정된 포인트 가져오기
-			Main.db.pstmt = Main.db.con.prepareStatement(sql6);
+			Main.db.pstmt = Main.db.con.prepareStatement(sql4);
 			Main.db.pstmt.setInt(1, MemberLogin.member.getNo());
 			Main.db.rs = Main.db.pstmt.executeQuery();
 			while (Main.db.rs.next()) {
@@ -141,7 +139,7 @@ public class PayMoney extends JFrame {
 	public String date() {
 		String date = "";
 		try {
-			String sql = "select substr(to_char(sysdate, 'yyyy-mm-dd'), 1, 10) from dual";
+			String sql = "select to_char(sysdate, 'yyyy-mm-dd') from dual";
 			Main.db.pstmt = Main.db.con.prepareStatement(sql);
 			Main.db.rs = Main.db.pstmt.executeQuery();
 			while (Main.db.rs.next()) {

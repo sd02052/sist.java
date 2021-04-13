@@ -163,7 +163,7 @@ public class MemberList extends JFrame {
 	private void memberSelect() {
 
 		try {
-			String sql = "select * from member order by mem_no";
+			String sql = "select * from member order by mem_no desc";
 
 			Main.db.pstmt = Main.db.con.prepareStatement(sql);
 

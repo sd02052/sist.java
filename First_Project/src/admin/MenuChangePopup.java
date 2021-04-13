@@ -29,13 +29,14 @@ public class MenuChangePopup extends JDialog {
 		JLabel menuLabel = new JLabel("메뉴 이름 : ");
 		menuLabel.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		menuLabel.setForeground(Color.WHITE);
-		menuLabel.setBounds(114, 79, 67, 15);
+		menuLabel.setBounds(80, 79, 67, 15);
 		Panel.add(menuLabel);
 
 		int row = MenuChange.menuTable.getSelectedRow();
 		MenuChange.model.getValueAt(row, 0);
 		JLabel lblNewLabel = new JLabel((String) MenuChange.model.getValueAt(row, 0));
-		lblNewLabel.setBounds(210, 80, 118, 15);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setBounds(159, 79, 205, 15);
 		Panel.add(lblNewLabel);
 
 		// 수정 가격 레이블/텍스트필드
@@ -46,8 +47,9 @@ public class MenuChangePopup extends JDialog {
 		Panel.add(priceLabel);
 
 		priceText = new JTextField((String) MenuChange.model.getValueAt(row, 1));
+		priceText.setHorizontalAlignment(SwingConstants.LEFT);
 		priceText.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		priceText.setBounds(210, 110, 118, 21);
+		priceText.setBounds(193, 110, 118, 21);
 		Panel.add(priceText);
 		priceText.setColumns(10);
 
