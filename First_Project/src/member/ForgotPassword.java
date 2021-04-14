@@ -95,12 +95,12 @@ public class ForgotPassword {
 		label_1.setBounds(565, 213, 48, 15);
 		frame.getContentPane().add(label_1);
 
-		label_2 = new JLabel("아이디 표시");
-		label_2.setBounds(704, 379, 81, 15);
+		label_2 = new JLabel("");
+		label_2.setBounds(735, 369, 81, 15);
 		frame.getContentPane().add(label_2);
 
-		label_3 = new JLabel("비밀번호 표시");
-		label_3.setBounds(704, 429, 81, 15);
+		label_3 = new JLabel("");
+		label_3.setBounds(735, 419, 81, 15);
 		frame.getContentPane().add(label_3);
 
 		JButton button = new JButton("찾기");
@@ -114,6 +114,16 @@ public class ForgotPassword {
 		button.setBackground(new Color(0, 98, 60));
 		button.setBounds(688, 289, 97, 31);
 		frame.getContentPane().add(button);
+		
+		JLabel lblNewLabel = new JLabel("아이디 : ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(648, 369, 75, 15);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("비밀번호 : ");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(648, 419, 75, 15);
+		frame.getContentPane().add(lblNewLabel_1);
 
 		frame.setVisible(true);
 	}

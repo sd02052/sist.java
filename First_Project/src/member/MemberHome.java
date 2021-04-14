@@ -90,10 +90,11 @@ public class MemberHome {
 
 		// 로그인한 손님 이름출력
 		lblNewLabel = new JLabel(MemberLogin.member.getName());
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 		lblNewLabel.setBackground(new Color(0, 98, 60));
-		lblNewLabel.setBounds(117, 130, 114, 28);
+		lblNewLabel.setBounds(78, 130, 153, 28);
 		frame.getContentPane().add(lblNewLabel);
 
 		// 고객님! text
