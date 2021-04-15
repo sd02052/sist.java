@@ -46,7 +46,7 @@ public class PayPoint extends JFrame {
 		lblNewLabel_1.setForeground(fontColor);
 		contentPane.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_1_1 = new JLabel(" 사용할 포인트를 입력하세요. ");
+		JLabel lblNewLabel_1_1 = new JLabel(" 사용할 포인트를 입력하세요.");
 		lblNewLabel_1_1.setBounds(145, 132, 220, 42);
 		lblNewLabel_1_1.setFont(font1);
 		lblNewLabel_1_1.setForeground(fontColor);
@@ -54,7 +54,7 @@ public class PayPoint extends JFrame {
 
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField.setBounds(180, 170, 130, 26);
+		textField.setBounds(178, 201, 130, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
@@ -89,6 +89,14 @@ public class PayPoint extends JFrame {
 		JLabel lblNewLabel_5 = new JLabel("p");
 		lblNewLabel_5.setBounds(340, 96, 25, 15);
 		contentPane.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_5_1 = new JLabel("p");
+		lblNewLabel_5_1.setBounds(311, 206, 25, 15);
+		contentPane.add(lblNewLabel_5_1);
+		
+		JLabel lblNewLabel_6 = new JLabel("(10p 단위로만 입력가능.)");
+		lblNewLabel_6.setBounds(183, 176, 153, 15);
+		contentPane.add(lblNewLabel_6);
 
 		// 이벤트
 
