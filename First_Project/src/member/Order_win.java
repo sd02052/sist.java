@@ -565,7 +565,7 @@ public class Order_win extends JFrame {
 
 				for (int i = 0; i < model.getRowCount(); i++) {
 					if (model.getValueAt(i, 0).equals(menu_name)) {
-						model.removeRow(i);
+						return;
 					}
 				}
 
@@ -607,7 +607,7 @@ public class Order_win extends JFrame {
 
 			total();
 
-			table.changeSelection(row, 0, false, false);
+			table.changeSelection(table.getRowCount() - 1, 0, false, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -643,7 +643,7 @@ public class Order_win extends JFrame {
 			}
 
 			total();
-			table.changeSelection(row, 0, false, false);
+			table.changeSelection(table.getRowCount() - 1, 0, false, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -661,7 +661,7 @@ public class Order_win extends JFrame {
 		textField_1.setText(String.valueOf(MemberLogin.member.getMileage()));
 	}
 
-	public static void createTable(JTable table) {
+	public static void createTable(JTable table) { // 테이블 중앙정렬
 		DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
 
 		tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);

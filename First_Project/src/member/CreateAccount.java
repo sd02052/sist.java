@@ -158,6 +158,8 @@ public class CreateAccount {
 		try {
 			if (txtId.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.");
+			} else if (checkInputOnlyNumberAndAlphabet(txtId.getText())) {
+				JOptionPane.showMessageDialog(null, "영문(대, 소문자)이나 숫자만 입력해주세요.");
 			} else if (passwordField.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.");
 			} else if (passwordField_1.getText().isEmpty()) {
@@ -232,6 +234,24 @@ public class CreateAccount {
 		} else {
 			return false;
 		}
+	}
+
+	public boolean checkInputOnlyNumberAndAlphabet(String textInput) {
+		char chrInput;
+		for (int i = 0; i < textInput.length(); i++) {
+			chrInput = textInput.charAt(i); // 입력받은 텍스트에서 문자 하나하나 가져와서 체크
+
+			if (chrInput >= 0x61 && chrInput <= 0x7A) {
+				// 영문(소문자) OK!
+			} else if (chrInput >= 0x41 && chrInput <= 0x5A) {
+				// 영문(대문자) OK!
+			} else if (chrInput >= 0x30 && chrInput <= 0x39) {
+				// 숫자 OK!
+			} else {
+				return true; // 영문자도 아니고 숫자도 아님!
+			}
+		}
+		return false;
 	}
 
 }

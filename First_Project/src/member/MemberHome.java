@@ -28,49 +28,13 @@ public class MemberHome {
 	private JLabel mainLbl2; // 사용가능 포인트 Label
 	private JLabel pointLbl; // p(포인트) Label
 	private JLabel lblNewLabel;
-
-	// 광고 이미지 변환 메서드
-	private static void mChangeImage(int Value) {
-		ImageIcon Path = null;
-
-		if (Value == 1) {
-			Path = new ImageIcon("Image/banner1.png");
-		} else if (Value == 2) {
-			Path = new ImageIcon("Image/banner2.png");
-		} else if (Value == 3) {
-			Path = new ImageIcon("Image/banner3.png");
-		} else if (Value == 4) {
-			Path = new ImageIcon("Image/banner4.jpg");
-		} else if (Value == 5) {
-			Path = new ImageIcon("Image/banner5.jpg");
-		}
-
-		Image img1 = Path.getImage();
-		Image changeImg1 = img1.getScaledInstance(360, 360, Image.SCALE_SMOOTH);
-		ImageIcon changeIcon1 = new ImageIcon(changeImg1);
-
-		imageLbl.setIcon(changeIcon1);
-	}
+	private Timer tmr;
+	private TimerTask tTask;
 
 	public MemberHome() {
 
-		// 광고 이미지 타이머 메서드
-		Timer tmr = new Timer();
-		TimerTask tTask = new TimerTask() {
-
-			@Override
-			public void run() {
-				mChangeImage(ChangeCount);
-
-				ChangeCount++;
-
-				if (ChangeCount == 6)
-					ChangeCount = 1;
-			}
-		};
-
-		tmr.schedule(tTask, 3000, 3000);
-		//
+		// 광고 이미지 타이머
+		timer();
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 600);
@@ -154,6 +118,7 @@ public class MemberHome {
 				int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					MemberLogin.member = null;
+					tmr.cancel();
 					new MemberLogin();
 					frame.dispose();
 				}
@@ -185,18 +150,13 @@ public class MemberHome {
 		// 이벤트
 		// 정보수정 버튼 이벤트
 		infoChangeBtn.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				new InfoChangePopup();
-
 			}
 		});
 
 		// 회원탈퇴 버튼 이벤트
 		deleteBtn.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				int result = JOptionPane.showConfirmDialog(null, "정말 탈퇴하시겠습니까?", "탈퇴", JOptionPane.YES_NO_OPTION);
@@ -214,7 +174,6 @@ public class MemberHome {
 
 	// 회원탈퇴 메서드
 	private void delete() {
-
 		try {
 			String sql = "delete from member where mem_no = ?";
 
@@ -229,10 +188,49 @@ public class MemberHome {
 			} else {
 				JOptionPane.showMessageDialog(null, "회원 탈퇴에 실패하였습니다.");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	// 광고 이미지 변환 메서드
+	private static void mChangeImage(int Value) {
+		ImageIcon Path = null;
+
+		if (Value == 1) {
+			Path = new ImageIcon("Image/banner1.png");
+		} else if (Value == 2) {
+			Path = new ImageIcon("Image/banner2.png");
+		} else if (Value == 3) {
+			Path = new ImageIcon("Image/banner3.png");
+		} else if (Value == 4) {
+			Path = new ImageIcon("Image/banner4.jpg");
+		} else if (Value == 5) {
+			Path = new ImageIcon("Image/banner5.jpg");
+		}
+
+		Image img1 = Path.getImage();
+		Image changeImg1 = img1.getScaledInstance(360, 360, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon1 = new ImageIcon(changeImg1);
+
+		imageLbl.setIcon(changeIcon1);
+	}
+
+	void timer() {
+		tmr = new Timer();
+		tTask = new TimerTask() {
+
+			@Override
+			public void run() {
+				mChangeImage(ChangeCount);
+
+				ChangeCount++;
+
+				if (ChangeCount == 6)
+					ChangeCount = 1;
+			}
+		};
+
+		tmr.schedule(tTask, 3000, 3000);
 	}
 }

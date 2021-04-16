@@ -58,7 +58,7 @@ public class MemberLogin extends JFrame {
 		btnNewButton_3.setBorder(BorderFactory.createLineBorder(c));
 		frame.getContentPane().add(btnNewButton_3);
 
-		JButton btnNewButton_1 = new JButton("\uBE44\uBC00\uBC88\uD638 \uCC3E\uAE30");
+		JButton btnNewButton_1 = new JButton("계정 찾기");
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() { // 비밀번호 찾기 이벤트
 			public void actionPerformed(ActionEvent e) {
